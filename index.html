@@ -1,208 +1,490 @@
-<!DOCTYPE HTML>
-<!--
-	Prologue by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Prologue by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brandon McManus- Data Analyst Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-		<!-- Header -->
-			<div id="header">
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
 
-				<div class="top">
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 40px;
+        }
 
-					<!-- Logo -->
-						<div id="logo">
-							<span class="image avatar48"><img src="images/avatar.jpg" alt="" /></span>
-							<h1 id="title">Jane Doe</h1>
-							<p>Hyperspace Engineer</p>
-						</div>
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 40px;
+        }
 
-					<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li><a href="#top" id="top-link"><span class="icon solid fa-home">Intro</span></a></li>
-								<li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">Portfolio</span></a></li>
-								<li><a href="#about" id="about-link"><span class="icon solid fa-user">About Me</span></a></li>
-								<li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">Contact</span></a></li>
-							</ul>
-						</nav>
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: block;
+            object-fit: cover;
+            border: 4px solid #e8e8e8;
+        }
 
-				</div>
+        .name {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-align: center;
+        }
 
-				<div class="bottom">
+        .title {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 5px;
+            text-align: center;
+        }
 
-					<!-- Social Icons -->
-						<ul class="icons">
-							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-							<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-							<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-						</ul>
+        .location {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 25px;
+            text-align: center;
+        }
 
-				</div>
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
 
-			</div>
+        .social-links a {
+            color: #333;
+            text-decoration: none;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
 
-		<!-- Main -->
-			<div id="main">
+        .social-links a:hover {
+            color: #0066cc;
+        }
 
-				<!-- Intro -->
-					<section id="top" class="one dark cover">
-						<div class="container">
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #333;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
 
-							<header>
-								<h2 class="alt">Hi! I'm <strong>Prologue</strong>, a <a href="http://html5up.net/license">free</a> responsive<br />
-								site template designed by <a href="http://html5up.net">HTML5 UP</a>.</h2>
-								<p>Ligula scelerisque justo sem accumsan diam quis<br />
-								vitae natoque dictum sollicitudin elementum.</p>
-							</header>
+        .btn:hover {
+            background: #333;
+            color: white;
+        }
 
-							<footer>
-								<a href="#portfolio" class="button scrolly">Magna Aliquam</a>
-							</footer>
+        .section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #e8e8e8;
+        }
 
-						</div>
-					</section>
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
 
-				<!-- Portfolio -->
-					<section id="portfolio" class="two">
-						<div class="container">
+        .about-text {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.7;
+        }
 
-							<header>
-								<h2>Portfolio</h2>
-							</header>
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-							<p>Vitae natoque dictum etiam semper magnis enim feugiat convallis convallis
-							egestas rhoncus ridiculus in quis risus amet curabitur tempor orci penatibus.
-							Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis
-							fusce hendrerit lacus ridiculus.</p>
+        .skill-tag {
+            padding: 6px 14px;
+            background: #e8f0fe;
+            color: #1967d2;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 500;
+        }
 
-							<div class="row">
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
-										<header>
-											<h3>Ipsum Feugiat</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
-										<header>
-											<h3>Rhoncus Semper</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
-										<header>
-											<h3>Magna Nullam</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
-										<header>
-											<h3>Natoque Vitae</h3>
-										</header>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
-										<header>
-											<h3>Dolor Penatibus</h3>
-										</header>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
-										<header>
-											<h3>Orci Convallis</h3>
-										</header>
-									</article>
-								</div>
-							</div>
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
 
-						</div>
-					</section>
+        .content-section {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
 
-				<!-- About Me -->
-					<section id="about" class="three">
-						<div class="container">
+        .section-header {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
 
-							<header>
-								<h2>About Me</h2>
-							</header>
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 25px;
+        }
 
-							<a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
+        .project-card {
+            border: 1px solid #e8e8e8;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
 
-							<p>Tincidunt eu elit diam magnis pretium accumsan etiam id urna. Ridiculus
-							ultricies curae quis et rhoncus velit. Lobortis elementum aliquet nec vitae
-							laoreet eget cubilia quam non etiam odio tincidunt montes. Elementum sem
-							parturient nulla quam placerat viverra mauris non cum elit tempus ullamcorper
-							dolor. Libero rutrum ut lacinia donec curae mus vel quisque sociis nec
-							ornare iaculis.</p>
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
 
-						</div>
-					</section>
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
 
-				<!-- Contact -->
-					<section id="contact" class="four">
-						<div class="container">
+        .project-content {
+            padding: 20px;
+        }
 
-							<header>
-								<h2>Contact</h2>
-							</header>
+        .project-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
 
-							<p>Elementum sem parturient nulla quam placerat viverra
-							mauris non cum elit tempus ullamcorper dolor. Libero rutrum ut lacinia
-							donec curae mus. Eleifend id porttitor ac ultricies lobortis sem nunc
-							orci ridiculus faucibus a consectetur. Porttitor curae mauris urna mi dolor.</p>
+        .project-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
 
-							<form method="post" action="#">
-								<div class="row">
-									<div class="col-6 col-12-mobile"><input type="text" name="name" placeholder="Name" /></div>
-									<div class="col-6 col-12-mobile"><input type="text" name="email" placeholder="Email" /></div>
-									<div class="col-12">
-										<textarea name="message" placeholder="Message"></textarea>
-									</div>
-									<div class="col-12">
-										<input type="submit" value="Send Message" />
-									</div>
-								</div>
-							</form>
+        .project-tag {
+            padding: 4px 10px;
+            background: #f0f0f0;
+            color: #555;
+            border-radius: 12px;
+            font-size: 12px;
+        }
 
-						</div>
-					</section>
+        .project-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
 
-			</div>
+        .read-more {
+            color: #1967d2;
+            font-weight: 500;
+            font-size: 14px;
+            text-decoration: none;
+        }
 
-		<!-- Footer -->
-			<div id="footer">
+        /* Experience Timeline */
+        .experience-item {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e8e8e8;
+        }
 
-				<!-- Copyright -->
-					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
+        .experience-item:last-child {
+            border-bottom: none;
+        }
 
-			</div>
+        .experience-date {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 5px;
+        }
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+        .experience-role {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
 
-	</body>
+        .experience-description {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .experience-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .experience-tag {
+            padding: 4px 10px;
+            background: #f0f0f0;
+            color: #555;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-item {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .contact-item h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .contact-item a {
+            color: #1967d2;
+            text-decoration: none;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <img src="https://via.placeholder.com/150" alt="Your Photo" class="profile-img">
+            <h1 class="name">Brandon McManus</h1>
+            <p class="title">Inventory Control Analyst at Suncor Energy</p>
+            <p class="location">Based in Calgary, AB</p>
+
+            <div class="social-links">
+                <a href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn">LinkedIn</a>
+                <a href="https://github.com/yourusername" target="_blank" title="GitHub">GitHub</a>
+                <a href="https://kaggle.com/yourusername" target="_blank" title="Kaggle">Kaggle</a>
+                <a href="mailto:brandonmcmanus77@gmail.com" class="btn">Email Me</a>
+            </div>
+
+            <a href="your-resume.pdf" download class="btn" style="display: block; text-align: center; margin-top: 15px;">Download Resume</a>
+
+            <div class="section">
+                <h2 class="section-title">About</h2>
+                <p class="about-text">
+                    Data analyst with expertise in Power BI, SQL, and Python. Passionate about transforming complex data into actionable insights that drive business decisions. Experienced in financial analysis, process automation, and building dashboards that tell compelling stories.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills">
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Power BI</span>
+                    <span class="skill-tag">Tableau</span>
+                    <span class="skill-tag">Excel</span>
+                    <span class="skill-tag">SAP</span>
+                    <span class="skill-tag">Power Query</span>
+                    <span class="skill-tag">DAX</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Projects Section -->
+            <section class="content-section" id="projects">
+                <h2 class="section-header">Projects</h2>
+                <div class="projects-grid">
+                    <a href="Oil_Sands_Cost_Performance_Dashboard.html" class="project-card">
+                        <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                        <div class="project-content">
+                            <h3 class="project-title">Oil Sands Cost Performance Dashboard</h3>
+                            <div class="project-tags">
+                                <span class="project-tag">Power BI</span>
+                                <span class="project-tag">SAP</span>
+                                <span class="project-tag">DAX</span>
+                            </div>
+                            <p class="project-description">
+                                Built an executive Power BI dashboard tracking operating cost per barrel, production volumes, and variance analysis against budget. Automated SAP data extraction and created drill-down capabilities by cost center, enabling monthly stewardship reporting in under 30 minutes versus 4 hours manually.
+                            </p>
+                            <span class="read-more">Read more →</span>
+                        </div>
+                    </a>
+
+                    <a href="project2.html" class="project-card">
+                        <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                        <div class="project-content">
+                            <h3 class="project-title">Annual Business Planning Model</h3>
+                            <div class="project-tags">
+                                <span class="project-tag">Power BI</span>
+                                <span class="project-tag">Excel</span>
+                                <span class="project-tag">Power Query</span>
+                            </div>
+                            <p class="project-description">
+                                Developed an integrated planning model connecting production forecasts, commodity price assumptions, and capital budgets. Created scenario analysis capabilities showing EBITDA sensitivity to WTI/WCS differentials and production volumes, supporting strategic decision-making for $500M+ annual budgets.
+                            </p>
+                            <span class="read-more">Read more →</span>
+                        </div>
+                    </a>
+
+                    <a href="project3.html" class="project-card">
+                        <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                        <div class="project-content">
+                            <h3 class="project-title">Production & Netback Analysis Tool</h3>
+                            <div class="project-tags">
+                                <span class="project-tag">Power BI</span>
+                                <span class="project-tag">SQL</span>
+                                <span class="project-tag">Power Automate</span>
+                            </div>
+                            <p class="project-description">
+                                Automated daily production reporting integrated with commodity pricing feeds to calculate real-time netbacks by facility. Identified $2.3M opportunity in operational efficiency improvements through variance analysis between planned and actual performance across mining and upgrading operations.
+                            </p>
+                            <span class="read-more">Read more →</span>
+                        </div>
+                    </a>
+
+                    <a href="project4.html" class="project-card">
+                        <div class="project-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+                        <div class="project-content">
+                            <h3 class="project-title">Capital Projects Portfolio Tracker</h3>
+                            <div class="project-tags">
+                                <span class="project-tag">Power BI</span>
+                                <span class="project-tag">SAP</span>
+                                <span class="project-tag">Excel</span>
+                            </div>
+                            <p class="project-description">
+                                Created a Power BI solution tracking $150M+ in sustaining and growth capital across turnarounds, facility upgrades, and brownfield expansions. Automated variance reporting against AFE budgets, integrated schedule tracking, and provided executive-ready dashboards showing spend forecasts and project health indicators.
+                            </p>
+                            <span class="read-more">Read more →</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Experience Section -->
+            <section class="content-section" id="experience">
+                <h2 class="section-header">Experience</h2>
+                
+                <div class="experience-item">
+                    <p class="experience-date">Jan 2023 - Present</p>
+                    <h3 class="experience-role">Data Analyst at Current Company</h3>
+                    <p class="experience-description">
+                        Leading data analytics initiatives that support business decision-making. Developed automated reporting solutions using Power BI and SQL, reducing manual reporting time by 75%. Collaborate cross-functionally with finance, operations, and IT teams to drive process improvements and deliver actionable insights.
+                    </p>
+                    <div class="experience-tags">
+                        <span class="experience-tag">Power BI</span>
+                        <span class="experience-tag">SQL</span>
+                        <span class="experience-tag">Python</span>
+                        <span class="experience-tag">SAP</span>
+                    </div>
+                </div>
+
+                <div class="experience-item">
+                    <p class="experience-date">May 2021 - Dec 2022</p>
+                    <h3 class="experience-role">Financial Analyst at Previous Company</h3>
+                    <p class="experience-description">
+                        Supported FP&A team with budgeting, forecasting, and variance analysis. Built interactive dashboards for executive reporting and automated monthly close processes. Collaborated with regional managers to develop financial models supporting strategic planning initiatives.
+                    </p>
+                    <div class="experience-tags">
+                        <span class="experience-tag">Excel</span>
+                        <span class="experience-tag">Power Query</span>
+                        <span class="experience-tag">VBA</span>
+                        <span class="experience-tag">Financial Modeling</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="content-section" id="contact">
+                <h2 class="section-header">Get in Touch</h2>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <h3>Email</h3>
+                        <a href="mailto:your.email@example.com">your.email@example.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <h3>LinkedIn</h3>
+                        <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a>
+                    </div>
+                    <div class="contact-item">
+                        <h3>GitHub</h3>
+                        <a href="https://github.com/youruserna" target="_blank">github.com/yourusername</a>
+                    </div>
+                    <div class="contact-item">
+                        <h3>Location</h3>
+                        <p>Calgary, AB, Canada</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
 </html>
