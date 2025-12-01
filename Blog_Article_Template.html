@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oil Sands Cost Performance Dashboard - Brandon McManus</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            color: #1967d2;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #1967d2;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 40px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .project-subtitle {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 12px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .meta-value {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .tech-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .tech-tag {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .content-section {
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .section-subtitle {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 30px 0 15px 0;
+            color: #333;
+        }
+
+        .section-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Problem-Solution Grid */
+        .problem-solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .ps-card {
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid #e8e8e8;
+        }
+
+        .ps-card.problem {
+            background: #fff5f5;
+            border-color: #feb2b2;
+        }
+
+        .ps-card.solution {
+            background: #f0fff4;
+            border-color: #9ae6b4;
+        }
+
+        .ps-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .ps-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .ps-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ps-list li {
+            padding-left: 25px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .ps-list li:before {
+            content: "•";
+            position: absolute;
+            left: 10px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .problem .ps-list li:before {
+            color: #f56565;
+        }
+
+        .solution .ps-list li:before {
+            color: #48bb78;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Visualization Container */
+        .viz-container {
+            margin: 40px 0;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #e8e8e8;
+        }
+
+        .viz-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .viz-placeholder {
+            background: white;
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            padding: 60px 20px;
+            text-align: center;
+            color: #666;
+        }
+
+        .viz-embed {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            min-width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .step-description {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Key Insights */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .insight-card {
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .insight-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .insight-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        .code-title {
+            color: #9cdcfe;
+            margin-bottom: 10px;
+        }
+
+        /* Screenshot Gallery */
+        .screenshot-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .screenshot {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e8e8e8;
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .screenshot-caption {
+            padding: 15px;
+            background: #f8f9fa;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .cta-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 32px;
+            }
+
+            .problem-solution-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 30px 20px;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-link">
+                ← Back to Portfolio
+            </a>
+            <nav class="nav-links">
+                <a href="#overview">Overview</a>
+                <a href="#solution">Solution</a>
+                <a href="#results">Results</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="project-title">Oil Sands Cost Performance Dashboard</h1>
+            <p class="project-subtitle">Transforming manual stewardship reporting into automated insights that drive cost improvement decisions</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Client</span>
+                    <span class="meta-value">Suncor Energy - Oil Sands Finance</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Role</span>
+                    <span class="meta-value">Data Analyst</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Timeline</span>
+                    <span class="meta-value">3 months</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Impact</span>
+                    <span class="meta-value">87.5% time reduction</span>
+                </div>
+            </div>
+
+            <div class="tech-tags">
+                <span class="tech-tag">Power BI</span>
+                <span class="tech-tag">SAP HANA</span>
+                <span class="tech-tag">DAX</span>
+                <span class="tech-tag">Power Query</span>
+                <span class="tech-tag">SQL</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Overview Section -->
+        <section class="content-section" id="overview">
+            <h2 class="section-title">Project Overview</h2>
+            <p class="section-text">
+                Oil Sands Finance needed to track monthly operating costs, production volumes, and variance analysis against budget to support executive decision-making. The existing process was manual, time-intensive, and prone to errors, taking 4+ hours each month and delaying insights to leadership.
+            </p>
+
+            <!-- Problem-Solution Grid -->
+            <div class="problem-solution-grid">
+                <div class="ps-card problem">
+                    <div class="ps-icon">⚠️</div>
+                    <h3 class="ps-title">The Problem</h3>
+                    <ul class="ps-list">
+                        <li>Manual data extraction from multiple SAP tables took 90+ minutes</li>
+                        <li>Excel-based variance calculations prone to formula errors</li>
+                        <li>Static reports couldn't drill down by cost center or time period</li>
+                        <li>Leadership waited 3-5 days post month-end for insights</li>
+                        <li>No visibility into cost trends or emerging variances</li>
+                    </ul>
+                </div>
+
+                <div class="ps-card solution">
+                    <div class="ps-icon">✅</div>
+                    <h3 class="ps-title">The Solution</h3>
+                    <ul class="ps-list">
+                        <li>Automated SAP data extraction using Power Query</li>
+                        <li>Built robust DAX measures for dynamic variance calculations</li>
+                        <li>Created interactive drill-down capabilities by facility and cost type</li>
+                        <li>Enabled real-time refresh with publish-to-web functionality</li>
+                        <li>Reduced reporting cycle from 4 hours to 30 minutes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Impact Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">87.5%</div>
+                    <div class="metric-label">Time Reduction</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$2.3M</div>
+                    <div class="metric-label">Cost Opportunities Identified</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">15+</div>
+                    <div class="metric-label">Stakeholders Served</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Calculation Accuracy</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution Section -->
+        <section class="content-section" id="solution">
+            <h2 class="section-title">Solution & Approach</h2>
+
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Data Architecture & Integration</h3>
+                        <p class="step-description">
+                            Connected Power BI directly to SAP HANA tables containing cost center actuals, budget data, and production volumes. Built a data model with proper relationships between fact tables (costs, production) and dimension tables (time, cost centers, facilities). Implemented incremental refresh to handle historical data efficiently.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">DAX Measure Development</h3>
+                        <p class="step-description">
+                            Created complex DAX measures for operating cost per barrel calculations, year-over-year variance analysis, and budget variance tracking. Implemented time intelligence functions to enable flexible period comparisons (MTD, QTD, YTD) and rolling averages for trend analysis.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Dashboard Design & User Experience</h3>
+                        <p class="step-description">
+                            Designed an executive summary page showing overall cost performance with drill-through capabilities to detailed analysis by mining operations, upgrading units, and utilities. Incorporated conditional formatting to highlight variances exceeding thresholds and built interactive filters for ad-hoc analysis.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Testing, Deployment & Training</h3>
+                        <p class="step-description">
+                            Validated calculations against historical manual reports to ensure accuracy. Deployed to Power BI Service with scheduled refresh. Conducted training sessions with Finance team on dashboard usage and interpretation. Established feedback loop for continuous improvement.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sample DAX Code -->
+            <div class="code-block">
+                <div class="code-title">// Sample DAX Measure: Operating Cost Per Barrel</div>
+                <pre>Operating Cost Per Barrel = 
+DIVIDE(
+    [Total Operating Costs],
+    [Total Production Volume],
+    BLANK()
+)
+
+Budget Variance % = 
+DIVIDE(
+    [Total Operating Costs] - [Budget Operating Costs],
+    [Budget Operating Costs],
+    0
+)</pre>
+            </div>
+
+            <!-- Embedded Visualization -->
+            <div class="viz-container">
+                <h3 class="viz-title">Interactive Dashboard Preview</h3>
+                <!-- Replace this placeholder with actual Power BI embed code -->
+                <div class="viz-placeholder">
+                    <p><strong>📊 Power BI Dashboard Embed</strong></p>
+                    <p>Replace this section with your Power BI embed iframe code</p>
+                    <p style="font-size: 14px; margin-top: 20px;">
+                        To embed: Publish your Power BI report → File → Embed report → Website or portal → Copy iframe code here
+                    </p>
+                </div>
+                <!-- Example of actual embed:
+                <iframe 
+                    class="viz-embed"
+                    src="YOUR_POWERBI_EMBED_URL"
+                    frameborder="0" 
+                    allowFullScreen="true">
+                </iframe>
+                -->
+            </div>
+        </section>
+
+        <!-- Key Insights Section -->
+        <section class="content-section">
+            <h2 class="section-title">Key Insights & Business Impact</h2>
+            
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h3 class="insight-title">💰 Cost Optimization Opportunities</h3>
+                    <p class="insight-text">
+                        Identified $2.3M in potential savings through variance analysis, including utilities overconsumption during planned maintenance and contractor labor inefficiencies in specific cost centers.
+                    </p>
+                </div>
+
+                <div class="insight-card">
+                    <h3 class="insight-title">⚡ Faster Decision-Making</h3>
+                    <p class="insight-text">
+                        Leadership now receives insights within 24 hours of month-end close versus 3-5 days previously, enabling faster response to emerging cost trends and operational issues.
+                    </p>
+                </div>
+
+                <div class="insight-card">
+                    <h3 class="insight-title">📈 Improved Accuracy</h3>
+                    <p class="insight-text">
+                        Eliminated manual calculation errors that previously occurred 2-3 times per quarter, improving stakeholder confidence in financial data and reducing time spent on reconciliation.
+                    </p>
+                </div>
+
+                <div class="insight-card">
+                    <h3 class="insight-title">🎯 Self-Service Analytics</h3>
+                    <p class="insight-text">
+                        Finance team can now perform ad-hoc analysis without IT support, answering leadership questions in real-time during meetings rather than requiring follow-up analysis requests.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Screenshots & Visuals</h3>
+            <div class="screenshot-gallery">
+                <div class="screenshot">
+                    <img src="https://via.placeholder.com/600x400/667eea/ffffff?text=Executive+Summary+Dashboard" alt="Executive Summary">
+                    <div class="screenshot-caption">Executive summary showing cost per barrel trends and key variances</div>
+                </div>
+                <div class="screenshot">
+                    <img src="https://via.placeholder.com/600x400/764ba2/ffffff?text=Drill-Down+Analysis" alt="Drill-down">
+                    <div class="screenshot-caption">Drill-down capability by cost center and time period</div>
+                </div>
+                <div class="screenshot">
+                    <img src="https://via.placeholder.com/600x400/f093fb/ffffff?text=Variance+Analysis" alt="Variance Analysis">
+                    <div class="screenshot-caption">Budget variance analysis with conditional formatting</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="content-section" id="results">
+            <h2 class="section-title">Results & Outcomes</h2>
+            <p class="section-text">
+                The automated dashboard transformed how Oil Sands Finance conducts monthly stewardship reporting, delivering measurable improvements in efficiency, accuracy, and insight generation.
+            </p>
+
+            <h3 class="section-subtitle">Quantitative Results</h3>
+            <ul class="ps-list" style="padding-left: 25px; margin: 20px 0;">
+                <li>Reduced monthly reporting time from 4 hours to 30 minutes (87.5% reduction)</li>
+                <li>Eliminated 2-3 calculation errors per quarter that previously required rework</li>
+                <li>Enabled analysis of $500M+ in annual operating costs across 12 facilities</li>
+                <li>Identified $2.3M in cost optimization opportunities in first 6 months</li>
+                <li>Reduced time-to-insight from 3-5 days to less than 24 hours post month-end</li>
+            </ul>
+
+            <h3 class="section-subtitle">Qualitative Impact</h3>
+            <ul class="ps-list" style="padding-left: 25px; margin: 20px 0;">
+                <li>Finance team freed up to focus on value-added analysis rather than data compilation</li>
+                <li>Leadership gained confidence in real-time cost visibility and trend analysis</li>
+                <li>Cross-functional collaboration improved through shared data platform</li>
+                <li>Established foundation for additional automated reporting initiatives</li>
+                <li>Dashboard adopted as template for other business units within Suncor</li>
+            </ul>
+
+            <h3 class="section-subtitle">Lessons Learned</h3>
+            <p class="section-text">
+                <strong>Data Quality is Critical:</strong> Initial implementation revealed data quality issues in SAP cost center mappings that required cleanup before accurate reporting was possible.
+            </p>
+            <p class="section-text">
+                <strong>User Adoption Requires Training:</strong> Even intuitive dashboards require proper training and documentation. Created quick-reference guides and hosted office hours to support adoption.
+            </p>
+            <p class="section-text">
+                <strong>Incremental Rollout Works Best:</strong> Started with executive summary, validated with stakeholders, then added drill-down functionality based on feedback rather than building everything upfront.
+            </p>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2 class="cta-title">Interested in Similar Solutions?</h2>
+            <p class="cta-text">
+                I'm always looking for opportunities to solve complex business problems through data analytics and automation.
+            </p>
+            <div class="cta-buttons">
+                <a href="index.html" class="btn btn-primary">View More Projects</a>
+                <a href="mailto:brandonmcmanus77@gmail.com" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
