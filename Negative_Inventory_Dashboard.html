@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Negative Inventory Dashboard - Brandon McManus</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            color: #1967d2;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #1967d2;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 40px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .project-subtitle {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 12px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .meta-value {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .tech-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .tech-tag {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .content-section {
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .section-subtitle {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 30px 0 15px 0;
+            color: #333;
+        }
+
+        .section-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Problem-Solution Grid */
+        .problem-solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .ps-card {
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid #e8e8e8;
+        }
+
+        .ps-card.problem {
+            background: #fff5f5;
+            border-color: #feb2b2;
+        }
+
+        .ps-card.solution {
+            background: #f0fff4;
+            border-color: #9ae6b4;
+        }
+
+        .ps-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .ps-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .ps-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ps-list li {
+            padding-left: 25px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .ps-list li:before {
+            content: "•";
+            position: absolute;
+            left: 10px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .problem .ps-list li:before {
+            color: #f56565;
+        }
+
+        .solution .ps-list li:before {
+            color: #48bb78;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            min-width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .step-description {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Architecture Diagram */
+        .architecture-diagram {
+            margin: 40px 0;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .architecture-diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Screenshot Gallery */
+        .screenshot-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .screenshot {
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e8e8e8;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .screenshot-caption {
+            padding: 20px;
+            background: #f8f9fa;
+            font-size: 15px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Key Insights */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .insight-card {
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .insight-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .insight-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .cta-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Data Model */
+        .data-model {
+            margin: 40px 0;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .data-model img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 32px;
+            }
+
+            .problem-solution-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 30px 20px;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-link">
+                ← Back to Portfolio
+            </a>
+            <nav class="nav-links">
+                <a href="#overview">Overview</a>
+                <a href="#solution">Solution</a>
+                <a href="#results">Results</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background-image: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%), url('Images/NegativeInventory/PlantOwnerView.png'); background-size: cover; background-position: center;">
+        <div class="hero-content">
+            <h1 class="project-title">Negative Inventory Dashboard</h1>
+            <p class="project-subtitle">Automating negative inventory tracking to eliminate manual processes and accelerate month-end resolution timelines</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Client</span>
+                    <span class="meta-value">Suncor Energy - Inventory Control</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Role</span>
+                    <span class="meta-value">Inventory Control Analyst</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Timeline</span>
+                    <span class="meta-value">2 months</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Impact</span>
+                    <span class="meta-value">96.7% time reduction</span>
+                </div>
+            </div>
+
+            <div class="tech-tags">
+                <span class="tech-tag">Power BI</span>
+                <span class="tech-tag">Power Automate</span>
+                <span class="tech-tag">SAP</span>
+                <span class="tech-tag">SharePoint</span>
+                <span class="tech-tag">Power Query</span>
+                <span class="tech-tag">DAX</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Overview Section -->
+        <section class="content-section" id="overview">
+            <h2 class="section-title">Project Overview</h2>
+            <p class="section-text">
+                In Oil and Gas operations, multiple companies often store product in shared plant tanks. When a plant consumes more product than delivered, it creates negative inventory positions for individual companies, causing cost accounting and financial reporting issues. The inventory control team's primary responsibility is to resolve these positions and implement processes to mitigate inventory risk—the potential for losses and inefficiencies affecting scheduling and downstream departments.
+            </p>
+
+            <!-- Problem-Solution Grid -->
+            <div class="problem-solution-grid">
+                <div class="ps-card problem">
+                    <div class="ps-icon">⚠️</div>
+                    <h3 class="ps-title">The Challenge</h3>
+                    <ul class="ps-list">
+                        <li>Multiple analysts independently exported SAP reports each month</li>
+                        <li>Manual copy-paste ETL processes in Excel were time-intensive</li>
+                        <li>Inconsistent report formats across team members</li>
+                        <li>30 minutes per analyst spent on data extraction vs analysis</li>
+                        <li>Duplicate effort resulted in 8+ hours of wasted time monthly</li>
+                        <li>Delayed resolution timelines during critical month-end periods</li>
+                    </ul>
+                </div>
+
+                <div class="ps-card solution">
+                    <div class="ps-icon">✅</div>
+                    <h3 class="ps-title">The Solution</h3>
+                    <ul class="ps-list">
+                        <li>Automated SAP data extraction using Power Automate scripts</li>
+                        <li>Centralized data storage in SharePoint</li>
+                        <li>Built unified Power BI data model as central tracking database</li>
+                        <li>Generated standardized reports distributed by legal entity</li>
+                        <li>Reduced process time from 30 min to 1 min per analyst</li>
+                        <li>Enabled focus on high-value analysis and resolution activities</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Impact Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">96.7%</div>
+                    <div class="metric-label">Time Reduction</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">8 hrs</div>
+                    <div class="metric-label">Monthly Time Saved</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">100%</div>
+                    <div class="metric-label">Report Consistency</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">3+</div>
+                    <div class="metric-label">Analysts Supported</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution Architecture -->
+        <section class="content-section">
+            <h2 class="section-title">Solution Architecture</h2>
+            <p class="section-text">
+                The solution integrates multiple systems to create an end-to-end automated workflow, eliminating manual data handling and enabling real-time reporting capabilities.
+            </p>
+
+            <div class="architecture-diagram">
+                <h3 class="section-subtitle">Data Flow Architecture</h3>
+                <img src="Images/NegativeInventory/DataArchitecture.png" alt="Architecture Diagram - Replace with actual image" style="background: white; padding: 20px;">
+                <p class="screenshot-caption">System architecture showing data flow from SAP extraction through Power BI visualization and automated distribution</p>
+            </div>
+
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Data Extraction & Automation</h3>
+                        <p class="step-description">
+                            Implemented Power Automate scripts to extract negative inventory data from SAP on a scheduled basis. The automation queries multiple SAP tables including material master data, plant inventory positions, and ownership records. Data is extracted in a standardized format and automatically saved to a designated SharePoint folder, eliminating manual exports.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Centralized Data Storage</h3>
+                        <p class="step-description">
+                            Configured SharePoint as the central repository for all extracted data and supporting Excel source files. This approach provides version control, accessibility for all team members, and serves as the single source of truth. The folder structure mirrors the data organization, making it intuitive for analysts to locate specific datasets.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Power BI Data Model Development</h3>
+                        <p class="step-description">
+                            Built a comprehensive Power BI data model connecting SAP extracts and Excel source files. Created relationships between dimension tables (plants, materials, legal entities) and fact tables (inventory positions, historical trends). Implemented DAX measures for calculations including total negative inventory values, item counts, and deadline tracking.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Interactive Dashboard & Reporting</h3>
+                        <p class="step-description">
+                        Designed interactive dashboards with two primary views: a Plant Owner View for external stakeholders to monitor their negative inventory positions, and an Internal Checks view for inventory control analysts to track resolution progress. Implemented drill-down capabilities by plant, material, and workday for detailed analysis. Added an integrated help request form that automatically routes submissions to the appropriate inventory control analyst based on legal entity using Power Automate, ensuring timely response and accountability.                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Model Section -->
+        <section class="content-section">
+            <h2 class="section-title">Data Model & Integration</h2>
+            <p class="section-text">
+                The Power BI data model serves as the central tracking database, integrating multiple data sources and enabling comprehensive analysis of negative inventory positions across all plants and legal entities.
+            </p>
+
+            <div class="data-model" style="padding: 20px; background: white;">
+                <h3 class="section-subtitle">Power BI Data Model Schema</h3>
+                <a href="Images/NegativeInventory/DataModel.png" target="_blank" style="display: block; cursor: zoom-in;">
+                    <img src="Images/NegativeInventory/DataModel.png" alt="Data Model Schema" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #e8e8e8;">
+                </a>
+                <p class="screenshot-caption" style="text-align: center; margin-top: 15px; font-size: 14px; color: #888;">
+                    Click image to view full size | Comprehensive data model showing relationships between SAP extracts, dimension tables, and fact tables for negative inventory tracking
+                </p>
+            </div>
+
+            <h3 class="section-subtitle">Key Data Sources</h3>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h3 class="insight-title">📊 SAP Data</h3>
+                    <p class="insight-text">
+                        Direct connection to SAP tables for real-time inventory positions, material master data, and plant ownership information. Automated extraction eliminates manual exports.
+                    </p>
+                </div>
+
+                <div class="insight-card">
+                    <h3 class="insight-title">📁 Excel Source Files</h3>
+                    <p class="insight-text">
+                        Integration with supporting Excel files stored in SharePoint including cost centers, workday guides, and sorting tables for enhanced analysis capabilities.
+                    </p>
+                </div>
+
+                <div class="insight-card">
+                    <h3 class="insight-title">🔄 Fact Tables</h3>
+                    <p class="insight-text">
+                        Consolidated fact tables tracking current negative inventory positions, historical closing inventory, and workday-specific snapshots for trend analysis.
+                    </p>
+                </div>
+
+                <div class="insight-card">
+                    <h3 class="insight-title">🏷️ Dimension Tables</h3>
+                    <p class="insight-text">
+                        Dimension tables for plants, materials, legal entities, and time periods enabling flexible filtering and drill-down analysis across all business dimensions.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Views -->
+        <section class="content-section" id="solution">
+            <h2 class="section-title">Dashboard Views & Functionality</h2>
+            <p class="section-text">
+                The solution provides two complementary dashboard views: an external-facing Plant Owner View for stakeholder reporting and an internal Negative Inventory Checks view for team analysis and resolution tracking.
+            </p>
+
+            <div class="screenshot-gallery">
+                <div class="screenshot">
+                    <img src="Images/NegativeInventory/PlantOwnerView.png" alt="Plant Owner View Dashboard" style="background: white; padding: 20px;">
+                    <div class="screenshot-caption">
+                        <strong>Plant Owner View Dashboard:</strong> External-facing report showing current negative inventory positions, item counts, and resolution deadlines. Features plant owner slicer for automated distribution, workday tracking, and countdown timers for production and non-production deadlines. Includes detailed table with plant, material, UOM, and current total stock for each negative position.
+                    </div>
+                </div>
+
+                <div class="screenshot">
+                    <img src="Images/NegativeInventory/NegativeInventoryCheck.png" alt="Negative Inventory Checks Dashboard" style="background: white; padding: 20px;">
+                    <div class="screenshot-caption">
+                        <strong>Negative Inventory Checks Dashboard:</strong> Internal view for inventory control analysts featuring workday navigation (-2 to +4 and Post-MIGO), plant and owner filters, and historical inventory tracking. Shows current positions alongside closing inventory from previous months for trend analysis. Enables quick identification of recurring issues and tracking of resolution progress across multiple workdays.
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Key Features</h3>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h3 class="insight-title">⏰ Automated Deadline Tracking</h3>
+                    <p class="insight-text">
+                        Real-time countdown displays days remaining until production/refinery and non-production deadlines. Visual indicators help prioritize resolution efforts based on urgency and plant type.
+                    </p>
+                </div>
+
+                <div class="insight-card">
+                    <h3 class="insight-title">🔍 Workday Navigation</h3>
+                    <p class="insight-text">
+                        Navigate through workdays (-2, -1, 1, 2, 3, 4, Post-MIGO) to track inventory positions across the month-end process. Compare current positions against historical data for pattern identification.
+                    </p>
+                </div>
+
+                <div class="insight-card">
+                    <h3 class="insight-title">📧 Automated Distribution</h3>
+                    <p class="insight-text">
+                        Power Automate script distributes reports to plant owners by legal entity via email. Ensures timely communication and accountability for negative inventory resolution.
+                    </p>
+                </div>
+
+                <div class="insight-card">
+                    <h3 class="insight-title">📈 Historical Trends</h3>
+                    <p class="insight-text">
+                        Track closing inventory positions from previous months to identify recurring issues. Supports root cause analysis and process improvement initiatives to prevent future occurrences.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="content-section" id="results">
+            <h2 class="section-title">Results & Business Impact</h2>
+            <p class="section-text">
+                The automated negative inventory tracking solution transformed the inventory control team's month-end process, delivering significant time savings and enabling analysts to focus on value-added resolution activities rather than manual data compilation.
+            </p>
+
+            <h3 class="section-subtitle">Quantitative Results</h3>
+            <ul class="ps-list" style="padding-left: 25px; margin: 20px 0;">
+                <li>Saved 8 hours of collective team time monthly by eliminating duplicate efforts</li>
+                <li>Achieved 100% report consistency across all analysts and legal entities</li>
+                <li>Eliminated manual errors in SAP data extraction and Excel pivot table creation</li>
+                <li>Supported 3+ inventory control analysts with standardized reporting workflow</li>
+            </ul>
+
+            <h3 class="section-subtitle">Qualitative Impact</h3>
+            <ul class="ps-list" style="padding-left: 25px; margin: 20px 0;">
+                <li>Inventory control analysts freed to focus on analyzing and resolving negative positions rather than compiling reports</li>
+                <li>Improved visibility into recurring negative inventory patterns supports root cause analysis</li>
+                <li>Standardized reporting format across legal entities improves stakeholder confidence</li>
+                <li>Established foundation for additional automated inventory reporting initiatives</li>
+            </ul>
+
+            <h3 class="section-subtitle">Key Learnings</h3>
+            <p class="section-text">
+                <strong>Centralized Data Storage is Essential:</strong> SharePoint as the single source of truth eliminated version control issues and ensured all team members accessed consistent data. This proved critical for maintaining report accuracy across multiple analysts.
+            </p>
+            <p class="section-text">
+                <strong>Automation Requires Initial Time Investment:</strong> Building the Power Automate scripts and Power BI data model required upfront effort, but the monthly time savings quickly justified the investment. Documenting the automation process ensured maintainability.
+            </p>
+            <p class="section-text">
+                <strong>User Feedback Drives Continuous Improvement:</strong> Regular check-ins with inventory control analysts revealed opportunities for enhancement, such as adding workday navigation and historical trend tracking, making the dashboard more valuable for day-to-day operations.
+            </p>
+            <p class="section-text">
+                <strong>Change Management Matters:</strong> Transitioning from manual Excel processes to automated Power BI reporting required training sessions and documentation. Creating a user guide with instructions on dashboard navigation and interpretation supported smooth adoption.
+            </p>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2 class="cta-title">Questions or Want to Chat?</h2>
+            <p class="cta-text">
+                I'm always happy to discuss process improvements, automation projects, or just connect about data analytics work. Feel free to reach out or check out my other projects.
+            </p>
+            <div class="cta-buttons">
+                <a href="index.html" class="btn btn-primary">View More Projects</a>
+                <a href="mailto:brandonmcmanus77@gmail.com" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </section>
+
+        <!-- Disclaimer -->
+        <div style="max-width: 800px; margin: 40px auto 0; padding: 30px; background: white; border-radius: 8px; border-left: 4px solid #667eea;">
+            <p style="font-size: 13px; color: #666; line-height: 1.6; margin: 0;">
+                <strong>Disclaimer:</strong> This case study represents work completed as an employee of Suncor Energy. All data, screenshots, and metrics have been anonymized or recreated for demonstration purposes. No confidential or proprietary information is disclosed. The views and presentation are my own and do not necessarily represent those of Suncor Energy.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+
