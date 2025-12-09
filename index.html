@@ -13,8 +13,8 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #f5f5f5;
-            color: #333;
+            background: #0a0e27;
+            color: #e4e4e7;
             line-height: 1.6;
         }
 
@@ -29,10 +29,11 @@
 
         /* Sidebar */
         .sidebar {
-            background: white;
+            background: #1a1f3a;
             padding: 40px 30px;
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+            border: 1px solid #2d3548;
             height: fit-content;
             position: sticky;
             top: 40px;
@@ -45,7 +46,8 @@
             margin: 0 auto 20px;
             display: block;
             object-fit: cover;
-            border: 4px solid #e8e8e8;
+            border: 4px solid #3b82f6;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
         }
 
         .name {
@@ -53,18 +55,19 @@
             font-weight: 600;
             margin-bottom: 8px;
             text-align: center;
+            color: #f8fafc;
         }
 
         .title {
             font-size: 16px;
-            color: #666;
+            color: #94a3b8;
             margin-bottom: 5px;
             text-align: center;
         }
 
         .location {
             font-size: 14px;
-            color: #888;
+            color: #64748b;
             margin-bottom: 25px;
             text-align: center;
         }
@@ -78,49 +81,51 @@
         }
 
         .social-links a {
-            color: #333;
+            color: #94a3b8;
             text-decoration: none;
             font-size: 20px;
             transition: color 0.3s;
         }
 
         .social-links a:hover {
-            color: #0066cc;
+            color: #3b82f6;
         }
 
         .btn {
             display: inline-block;
             padding: 10px 20px;
-            background: white;
-            border: 2px solid #333;
+            background: transparent;
+            border: 2px solid #3b82f6;
             border-radius: 20px;
             text-decoration: none;
-            color: #333;
+            color: #3b82f6;
             font-size: 14px;
             transition: all 0.3s;
             cursor: pointer;
         }
 
         .btn:hover {
-            background: #333;
+            background: #3b82f6;
             color: white;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
         }
 
         .section {
             margin-top: 30px;
             padding-top: 30px;
-            border-top: 1px solid #e8e8e8;
+            border-top: 1px solid #2d3548;
         }
 
         .section-title {
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 15px;
+            color: #f8fafc;
         }
 
         .about-text {
             font-size: 14px;
-            color: #555;
+            color: #94a3b8;
             line-height: 1.7;
         }
 
@@ -132,8 +137,9 @@
 
         .skill-tag {
             padding: 6px 14px;
-            background: #e8f0fe;
-            color: #1967d2;
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.2);
             border-radius: 16px;
             font-size: 13px;
             font-weight: 500;
@@ -147,21 +153,23 @@
         }
 
         .content-section {
-            background: white;
+            background: #1a1f3a;
             padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+            border: 1px solid #2d3548;
         }
 
         .section-header {
             font-size: 24px;
             font-weight: 600;
             margin-bottom: 10px;
+            color: #f8fafc;
         }
 
         .section-subheader {
             font-size: 14px;
-            color: #666;
+            color: #94a3b8;
             margin-bottom: 25px;
         }
 
@@ -183,28 +191,30 @@
         .filter-label {
             font-size: 14px;
             font-weight: 500;
-            color: #555;
+            color: #94a3b8;
         }
 
         .filter-btn {
             padding: 8px 16px;
-            background: #f0f0f0;
-            border: 2px solid transparent;
+            background: #0f1729;
+            border: 2px solid #2d3548;
             border-radius: 20px;
             font-size: 14px;
             cursor: pointer;
             transition: all 0.3s;
-            color: #555;
+            color: #94a3b8;
         }
 
         .filter-btn:hover {
-            background: #e0e0e0;
+            background: #1a1f3a;
+            border-color: #3b82f6;
         }
 
         .filter-btn.active {
-            background: #667eea;
+            background: #3b82f6;
             color: white;
-            border-color: #667eea;
+            border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
         }
 
         /* Projects Grid */
@@ -215,20 +225,22 @@
         }
 
         .project-card {
-            border: 1px solid #e8e8e8;
+            border: 1px solid #2d3548;
             border-radius: 12px;
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
             cursor: pointer;
             text-decoration: none;
             color: inherit;
             display: block;
             position: relative;
+            background: #0f1729;
         }
 
         .project-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
         }
 
         .project-card.hidden {
@@ -290,13 +302,14 @@
 
         .project-date {
             font-size: 12px;
-            color: #888;
+            color: #64748b;
         }
 
         .project-title {
             font-size: 20px;
             font-weight: 600;
             margin-bottom: 10px;
+            color: #f8fafc;
         }
 
         .project-tags {
@@ -308,21 +321,22 @@
 
         .project-tag {
             padding: 4px 10px;
-            background: #f0f0f0;
-            color: #555;
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.2);
             border-radius: 12px;
             font-size: 12px;
         }
 
         .project-description {
             font-size: 14px;
-            color: #666;
+            color: #94a3b8;
             line-height: 1.6;
             margin-bottom: 15px;
         }
 
         .read-more {
-            color: #1967d2;
+            color: #60a5fa;
             font-weight: 500;
             font-size: 14px;
             text-decoration: none;
@@ -332,7 +346,7 @@
         .no-results {
             text-align: center;
             padding: 60px 20px;
-            color: #666;
+            color: #64748b;
             display: none;
         }
 
@@ -343,6 +357,7 @@
         .no-results-icon {
             font-size: 48px;
             margin-bottom: 16px;
+            opacity: 0.5;
         }
 
         .no-results-text {
@@ -354,7 +369,7 @@
         .experience-item {
             margin-bottom: 30px;
             padding-bottom: 30px;
-            border-bottom: 1px solid #e8e8e8;
+            border-bottom: 1px solid #2d3548;
         }
 
         .experience-item:last-child {
@@ -363,7 +378,7 @@
 
         .experience-date {
             font-size: 14px;
-            color: #888;
+            color: #64748b;
             margin-bottom: 5px;
         }
 
@@ -371,11 +386,12 @@
             font-size: 20px;
             font-weight: 600;
             margin-bottom: 10px;
+            color: #f8fafc;
         }
 
         .experience-description {
             font-size: 14px;
-            color: #555;
+            color: #94a3b8;
             line-height: 1.7;
             margin-bottom: 15px;
         }
@@ -388,8 +404,9 @@
 
         .experience-tag {
             padding: 4px 10px;
-            background: #f0f0f0;
-            color: #555;
+            background: rgba(59, 130, 246, 0.1);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.2);
             border-radius: 12px;
             font-size: 12px;
         }
@@ -403,7 +420,8 @@
 
         .contact-item {
             padding: 20px;
-            background: #f8f9fa;
+            background: #0f1729;
+            border: 1px solid #2d3548;
             border-radius: 8px;
             text-align: center;
         }
@@ -411,10 +429,11 @@
         .contact-item h3 {
             font-size: 16px;
             margin-bottom: 10px;
+            color: #f8fafc;
         }
 
         .contact-item a {
-            color: #1967d2;
+            color: #60a5fa;
             text-decoration: none;
             word-break: normal;
             display: inline-block;
@@ -422,6 +441,11 @@
 
         .contact-item a:hover {
             text-decoration: underline;
+            color: #3b82f6;
+        }
+
+        .contact-item p {
+            color: #94a3b8;
         }
 
         /* Responsive */
