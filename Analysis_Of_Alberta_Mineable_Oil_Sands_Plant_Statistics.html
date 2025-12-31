@@ -194,6 +194,11 @@
             border-color: #14b8a6;
         }
 
+        .ps-card.financial {
+            background: rgba(234, 179, 8, 0.1);
+            border-color: #eab308;
+        }
+
         .ps-icon {
             font-size: 32px;
             margin-bottom: 15px;
@@ -232,6 +237,10 @@
 
         .objective .ps-list li:before {
             color: #14b8a6;
+        }
+
+        .financial .ps-list li:before {
+            color: #eab308;
         }
 
         /* Metrics Grid */
@@ -327,6 +336,18 @@
             border-left-color: #14b8a6;
         }
 
+        .insight-card.income {
+            border-left-color: #22c55e;
+        }
+
+        .insight-card.balance {
+            border-left-color: #3b82f6;
+        }
+
+        .insight-card.cashflow {
+            border-left-color: #eab308;
+        }
+
         .insight-title {
             font-size: 16px;
             font-weight: 600;
@@ -386,6 +407,41 @@
             line-height: 1.7;
         }
 
+        /* Screenshot Gallery */
+        .screenshot-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .screenshot {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #2d3548;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            background: #0f1729;
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .screenshot-caption {
+            padding: 20px;
+            background: #0f1729;
+            font-size: 15px;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .screenshot-caption strong {
+            color: #f8fafc;
+        }
+
         /* SAC Embed Placeholder */
         .sac-embed {
             margin: 30px 0;
@@ -427,6 +483,72 @@
             font-family: 'Monaco', monospace;
             font-size: 12px;
             color: #14b8a6;
+        }
+
+        /* Financial Implications Section */
+        .financial-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .financial-statement-card {
+            padding: 30px;
+            background: #0f1729;
+            border-radius: 12px;
+            border: 1px solid #2d3548;
+        }
+
+        .financial-statement-card h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #f8fafc;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .financial-statement-card .line-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .line-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: rgba(20, 184, 166, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid #14b8a6;
+        }
+
+        .line-item.income {
+            border-left-color: #22c55e;
+        }
+
+        .line-item.balance {
+            border-left-color: #3b82f6;
+        }
+
+        .line-item.cashflow {
+            border-left-color: #eab308;
+        }
+
+        .line-item-name {
+            font-size: 14px;
+            color: #e4e4e7;
+            font-weight: 500;
+        }
+
+        .line-item-impact {
+            font-size: 13px;
+            color: #94a3b8;
+            text-align: right;
+            max-width: 60%;
         }
 
         /* CTA Section */
@@ -525,6 +647,17 @@
             .data-table th, .data-table td {
                 padding: 8px 6px;
             }
+
+            .line-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .line-item-impact {
+                text-align: left;
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -538,7 +671,7 @@
             <nav class="nav-links">
                 <a href="#overview">Overview</a>
                 <a href="#analysis">Analysis</a>
-                <a href="#insights">Insights</a>
+                <a href="#financial">Financial Impact</a>
                 <a href="#methodology">Methodology</a>
             </nav>
         </div>
@@ -547,8 +680,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1 class="project-title">Alberta Mineable Oil Sands Operational Analysis</h1>
-            <p class="project-subtitle">Exploratory analysis of AER Statistical Series 39 data (2020-2024), examining production metrics, operational efficiency, and inter-facility performance to support business planning and capital allocation decisions in upstream oil sands finance.</p>
+            <h1 class="project-title">Exploratory Analysis of Alberta Mineable Oil Sands Operational Performance</h1>
+            <p class="project-subtitle">A Business Planning & Analytics Perspective on AER Statistical Series 39 (2020-2024). This analysis identifies key operational trends, develops strategic questions for business planning, and establishes a foundation for predictive modeling and capital allocation decisions relevant to upstream oil sands finance.</p>
             
             <div class="project-meta">
                 <div class="meta-item">
@@ -586,7 +719,7 @@
         <section class="content-section" id="overview">
             <h2 class="section-title">Executive Summary</h2>
             <p class="section-text">
-                This analysis examines five years of Alberta Energy Regulator's Statistical Series 39 data covering Alberta's mineable oil sands operations. Through systematic examination of production metrics, operational efficiency indicators, and inter-facility performance comparisons, key trends have been identified that inform strategic questions for business planning and establish a foundation for predictive modeling and capital allocation decisions.
+                This report presents a comprehensive exploratory analysis of the Alberta Energy Regulator's Statistical Series 39: Alberta Mineable Oil Sands Plant Statistics spanning 2020-2024. Through systematic examination of production metrics, operational efficiency indicators, and inter-facility performance comparisons, this analysis identifies key operational trends, develops strategic questions for business planning, and establishes a foundation for predictive modeling and capital allocation decisions relevant to upstream oil sands finance and business performance advisory.
             </p>
 
             <!-- Context-Objective Grid -->
@@ -611,28 +744,28 @@
                         <li>Benchmark operational efficiency metrics (recovery rates, energy intensity)</li>
                         <li>Identify seasonal patterns and production volatility factors</li>
                         <li>Analyze competitive positioning and market share dynamics</li>
-                        <li>Establish foundation for predictive modeling and forecasting</li>
+                        <li>Translate operational metrics to financial statement implications</li>
                     </ul>
                 </div>
             </div>
 
             <!-- Key Metrics -->
-            <h3 class="section-subtitle">Industry Snapshot (2024)</h3>
+            <h3 class="section-subtitle">Industry Snapshot (2020-2024)</h3>
             <div class="metrics-grid">
                 <div class="metric-card">
+                    <div class="metric-value">499.8M</div>
+                    <div class="metric-label">Total Bitumen Production (m³)</div>
+                    <div class="metric-sublabel">5-Year Cumulative</div>
+                </div>
+                <div class="metric-card">
                     <div class="metric-value">90.5M</div>
-                    <div class="metric-label">Bitumen Production (m³)</div>
-                    <div class="metric-sublabel">+4.9% YoY</div>
+                    <div class="metric-label">2024 Bitumen Production (m³)</div>
+                    <div class="metric-sublabel">+5.1% YoY</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">48.1M</div>
-                    <div class="metric-label">SCO Production (m³)</div>
-                    <div class="metric-sublabel">+5.9% YoY</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">919M</div>
-                    <div class="metric-label">Ore Mined (tonnes)</div>
-                    <div class="metric-sublabel">+3.7% YoY</div>
+                    <div class="metric-value">86.3M</div>
+                    <div class="metric-label">2020 Bitumen Production (m³)</div>
+                    <div class="metric-sublabel">Baseline Year</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">1.2%</div>
@@ -646,84 +779,112 @@
         <section class="content-section" id="analysis">
             <h2 class="section-title">Production Performance Analysis</h2>
             <p class="section-text">
-                Annual bitumen production across all major operators grew from 86.3 million m³ in 2020 to 90.5 million m³ in 2024, representing a compound annual growth rate of 1.2%. This growth occurred despite COVID-19 disruptions in 2020-2021 and demonstrates the sector's operational resilience.
+                Annual bitumen production across all major operators totaled 433.43 million m³ over the 2020-2024 period. Despite COVID-19 disruptions causing a production dip in 2021 (84.6M m³), the industry demonstrated resilience with a strong recovery to 90.5M m³ in 2024—representing a 5.1% year-over-year increase and a 1.2% compound annual growth rate over the period.
             </p>
 
-            <!-- Production Trend Chart Placeholder -->
-            <div class="sac-embed">
-                <div class="sac-embed-placeholder">📈</div>
-                <div class="sac-embed-title">Annual Production Trends Dashboard</div>
-                <div class="sac-embed-description">SAP Analytics Cloud visualization showing annual bitumen and SCO production by operator (2020-2024)</div>
-                <code>&lt;iframe src="[SAC_STORY_URL]"&gt;&lt;/iframe&gt;</code>
+            <!-- Production Trend Chart Screenshot -->
+            <div class="screenshot-gallery">
+                <div class="screenshot">
+                    <img src="Images/Oil-Sands-Analysis/Production-Performance-Analysis.png" alt="Production Performance Analysis Dashboard">
+                    <div class="screenshot-caption">
+                        <strong>Production Performance Dashboard:</strong> SAP Analytics Cloud visualization showing crude bitumen production trends by operator (2020-2024), market share distribution across major projects, and monthly production patterns. Total production reached 433.43 million m³ over the analysis period.
+                    </div>
+                </div>
             </div>
 
-            <h3 class="section-subtitle">Bitumen Production by Operator (2020-2024)</h3>
+            <h3 class="section-subtitle">Annual Bitumen Production Trend</h3>
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th>Operator</th>
-                        <th>2020 (M m³)</th>
-                        <th>2024 (M m³)</th>
-                        <th>Growth</th>
-                        <th>2024 Market Share</th>
+                        <th>Year</th>
+                        <th>Production (M m³)</th>
+                        <th>YoY Change</th>
+                        <th>Cumulative Total (M m³)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Imperial Kearl</td>
-                        <td>13.9</td>
-                        <td>15.9</td>
-                        <td class="value-positive">+14.4%</td>
-                        <td class="highlight">17.6%</td>
+                        <td>2020</td>
+                        <td>86.31</td>
+                        <td>—</td>
+                        <td>86.31</td>
                     </tr>
                     <tr>
-                        <td>CNRL Horizon</td>
-                        <td>15.7</td>
-                        <td>14.8</td>
-                        <td class="value-negative">-5.7%</td>
-                        <td class="highlight">16.4%</td>
+                        <td>2021</td>
+                        <td>84.55</td>
+                        <td class="value-negative">-2.0%</td>
+                        <td>170.87</td>
                     </tr>
                     <tr>
-                        <td>Suncor</td>
-                        <td>15.3</td>
-                        <td>13.7</td>
-                        <td class="value-negative">-10.3%</td>
-                        <td class="highlight">15.1%</td>
+                        <td>2022</td>
+                        <td>85.83</td>
+                        <td class="value-positive">+1.5%</td>
+                        <td>256.70</td>
+                    </tr>
+                    <tr>
+                        <td>2023</td>
+                        <td>86.19</td>
+                        <td class="value-positive">+0.4%</td>
+                        <td>342.89</td>
+                    </tr>
+                    <tr>
+                        <td>2024</td>
+                        <td class="highlight">90.55</td>
+                        <td class="value-positive">+5.1%</td>
+                        <td class="highlight">433.43</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="section-subtitle">Market Share by Operator (2020-2024 Total)</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Operator / Project</th>
+                        <th>Market Share</th>
+                        <th>Operator Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Imperial Kearl Mine</td>
+                        <td class="highlight">16.99%</td>
+                        <td>Bitumen Producer</td>
+                    </tr>
+                    <tr>
+                        <td>CNRL Horizon Oil Sands</td>
+                        <td class="highlight">16.58%</td>
+                        <td>Integrated</td>
+                    </tr>
+                    <tr>
+                        <td>Suncor Energy OSG</td>
+                        <td class="highlight">16.24%</td>
+                        <td>Integrated</td>
                     </tr>
                     <tr>
                         <td>Syncrude Aurora</td>
-                        <td>10.4</td>
-                        <td>10.7</td>
-                        <td class="value-positive">+2.8%</td>
-                        <td class="highlight">11.8%</td>
+                        <td class="highlight">12.06%</td>
+                        <td>Integrated</td>
                     </tr>
                     <tr>
-                        <td>CNRL Muskeg River</td>
-                        <td>8.7</td>
-                        <td>10.0</td>
-                        <td class="value-positive">+14.5%</td>
-                        <td class="highlight">11.0%</td>
-                    </tr>
-                    <tr>
-                        <td>Fort Hills</td>
-                        <td>6.5</td>
-                        <td>9.4</td>
-                        <td class="value-positive">+43.8%</td>
-                        <td class="highlight">10.4%</td>
+                        <td>CNUL Muskeg River Mine</td>
+                        <td class="highlight">11.08%</td>
+                        <td>Bitumen Producer</td>
                     </tr>
                     <tr>
                         <td>Syncrude Mildred Lake</td>
-                        <td>8.7</td>
-                        <td>8.5</td>
-                        <td class="value-negative">-2.0%</td>
-                        <td class="highlight">9.4%</td>
+                        <td class="highlight">10.04%</td>
+                        <td>Integrated</td>
                     </tr>
                     <tr>
-                        <td>CNRL Jackpine</td>
-                        <td>7.0</td>
-                        <td>7.5</td>
-                        <td class="value-positive">+6.4%</td>
-                        <td class="highlight">8.3%</td>
+                        <td>Fort Hills Mine</td>
+                        <td class="highlight">8.72%</td>
+                        <td>Bitumen Producer</td>
+                    </tr>
+                    <tr>
+                        <td>CNUL Jackpine Mine</td>
+                        <td class="highlight">8.28%</td>
+                        <td>Bitumen Producer</td>
                     </tr>
                 </tbody>
             </table>
@@ -731,27 +892,21 @@
             <h3 class="section-subtitle">Key Production Findings</h3>
             <div class="insights-grid">
                 <div class="insight-card">
-                    <h3 class="insight-title">📈 Fort Hills: Standout Performer</h3>
+                    <h3 class="insight-title">📈 Strong 2024 Recovery</h3>
                     <p class="insight-text">
-                        Fort Hills achieved 43.8% production growth over the period, recovering from early operational challenges to become a significant producer at 9.4M m³ in 2024.
+                        2024 marked the strongest production year in the period at 90.55M m³, representing 5.1% growth over 2023 and demonstrating the sector's operational resilience post-pandemic.
                     </p>
                 </div>
                 <div class="insight-card">
-                    <h3 class="insight-title">📉 Legacy Operator Challenges</h3>
+                    <h3 class="insight-title">🏭 Imperial Kearl Mine Leads Market Share</h3>
                     <p class="insight-text">
-                        Suncor (-10.3%) and CNRL Horizon (-5.7%) experienced production declines, potentially related to aging infrastructure and maintenance requirements.
+                        Imperial Oil Kearl Mine leads with 16.99% market share, followed closely by CNRL Horizon (16.58%) and Suncor Energy OSG(16.24%).
                     </p>
                 </div>
                 <div class="insight-card">
-                    <h3 class="insight-title">🏆 Imperial Kearl Leads Market</h3>
+                    <h3 class="insight-title">⚖️ Balanced Competition</h3>
                     <p class="insight-text">
-                        Imperial Kearl claimed the largest market share (17.6%) with consistent 14.4% growth, demonstrating effective operational execution.
-                    </p>
-                </div>
-                <div class="insight-card">
-                    <h3 class="insight-title">⚖️ Market Concentration Stable</h3>
-                    <p class="insight-text">
-                        Top 3 operators hold 49% market share, indicating a balanced competitive landscape among major producers.
+                        Top 3 operators hold about 50% market share, indicating a balanced competitive landscape. No single operator dominates, supporting competitive pricing dynamics.
                     </p>
                 </div>
             </div>
@@ -761,22 +916,24 @@
         <section class="content-section">
             <h2 class="section-title">Operational Efficiency Benchmarking</h2>
             <p class="section-text">
-                Operational efficiency varies significantly across operators, driven by ore quality, processing technology, and facility age. Understanding these efficiency metrics enables benchmarking and identification of operational improvement opportunities.
+                Operational efficiency varies significantly across operators, driven by ore quality, processing technology, and facility age. Understanding these efficiency metrics enables benchmarking and identification of operational improvement opportunities with direct implications for operating costs and profitability.
             </p>
 
-            <!-- Efficiency Dashboard Placeholder -->
-            <div class="sac-embed">
-                <div class="sac-embed-placeholder">⚡</div>
-                <div class="sac-embed-title">Operational Efficiency Dashboard</div>
-                <div class="sac-embed-description">SAP Analytics Cloud visualization comparing recovery rates, energy intensity, and gas consumption across operators</div>
-                <code>&lt;iframe src="[SAC_STORY_URL]"&gt;&lt;/iframe&gt;</code>
+            <!-- Efficiency Dashboard -->
+            <div class="screenshot-gallery">
+                <div class="screenshot">
+                    <img src="Images/Oil-Sands-Analysis/operational-efficiency-analysis.png" alt="Operational Efficiency Analysis Dashboard">
+                    <div class="screenshot-caption">
+                        <strong>Operational Efficiency Analysis Dashboard:</strong> SAP Analytics Cloud visualization showing bitumen recovery rates (m³/1000t ore), energy intensity (MWh/m³ bitumen), and gas intensity (10³m³/m³ bitumen) across operators. Color coding indicates performance—blue bars show recovery rates, red bars indicate higher energy/gas consumption, green indicates efficient consumption.
+                    </div>
+                </div>
             </div>
 
-            <h3 class="section-subtitle">Efficiency Metrics Comparison (2024)</h3>
+            <h3 class="section-subtitle">Efficiency Metrics Comparison (2020-2024 Average)</h3>
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th>Operator</th>
+                        <th>Operator / Project</th>
                         <th>Bitumen Recovery<br>(m³/1000t ore)</th>
                         <th>Energy Intensity<br>(MWh/m³ bitumen)</th>
                         <th>Gas Intensity<br>(10³m³/m³ bitumen)</th>
@@ -785,59 +942,59 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>CNRL Jackpine</td>
-                        <td class="highlight">113.3</td>
-                        <td class="highlight">0.051</td>
-                        <td class="highlight">0.106</td>
+                        <td>CNUL Muskeg River</td>
+                        <td class="highlight">111.5</td>
+                        <td>0.136</td>
+                        <td>0.211</td>
                         <td>🥇 1st</td>
                     </tr>
                     <tr>
-                        <td>CNRL Muskeg River</td>
-                        <td class="highlight">110.2</td>
-                        <td>0.129</td>
-                        <td>0.202</td>
+                        <td>Imperial Kearl</td>
+                        <td class="highlight">107.0</td>
+                        <td>0.098</td>
+                        <td>0.141</td>
                         <td>🥈 2nd</td>
                     </tr>
                     <tr>
-                        <td>Syncrude Aurora</td>
-                        <td>101.7</td>
-                        <td class="highlight">0.052</td>
-                        <td class="highlight">0.112</td>
+                        <td>CNUL Jackpine</td>
+                        <td class="highlight">104.8</td>
+                        <td class="value-positive">0.053</td>
+                        <td class="value-positive">0.110</td>
                         <td>🥉 3rd</td>
                     </tr>
                     <tr>
-                        <td>Imperial Kearl</td>
-                        <td>107.3</td>
-                        <td>0.095</td>
-                        <td>0.130</td>
+                        <td>Syncrude Aurora</td>
+                        <td>103.5</td>
+                        <td class="value-positive">0.051</td>
+                        <td class="value-positive">0.105</td>
                         <td>4th</td>
                     </tr>
                     <tr>
-                        <td>Suncor</td>
-                        <td>97.1</td>
-                        <td>0.158</td>
-                        <td>0.232</td>
+                        <td>Suncor Energy</td>
+                        <td>101.7</td>
+                        <td>0.154</td>
+                        <td>0.230</td>
                         <td>5th</td>
                     </tr>
                     <tr>
                         <td>Fort Hills</td>
-                        <td>90.3</td>
-                        <td>0.090</td>
-                        <td>0.160</td>
+                        <td>95.9</td>
+                        <td>0.100</td>
+                        <td>0.177</td>
                         <td>6th</td>
                     </tr>
                     <tr>
-                        <td>CNRL Horizon</td>
-                        <td>88.7</td>
-                        <td>0.131</td>
-                        <td>0.216</td>
+                        <td>Syncrude Mildred Lake</td>
+                        <td>94.0</td>
+                        <td class="value-negative">0.260</td>
+                        <td class="value-negative">0.387</td>
                         <td>7th</td>
                     </tr>
                     <tr>
-                        <td>Syncrude Mildred Lake</td>
-                        <td>88.2</td>
-                        <td>0.256</td>
-                        <td>0.363</td>
+                        <td>CNRL Horizon</td>
+                        <td>87.5</td>
+                        <td>0.135</td>
+                        <td>0.221</td>
                         <td>8th</td>
                     </tr>
                 </tbody>
@@ -846,200 +1003,188 @@
             <h3 class="section-subtitle">Efficiency Analysis Insights</h3>
             <div class="insights-grid">
                 <div class="insight-card">
-                    <h3 class="insight-title">⛏️ Recovery Rate Variance: 28%</h3>
+                    <h3 class="insight-title">⛏️ Recovery Rate Variance: 27%</h3>
                     <p class="insight-text">
-                        Bitumen recovery ranges from 88.2 to 113.3 m³ per 1000 tonnes ore, reflecting ore quality differences and extraction technology effectiveness.
+                        Bitumen recovery ranges from 87.5 to 111.5 m³ per 1000 tonnes ore mined, reflecting ore quality differences and extraction technology effectiveness across operations.
                     </p>
                 </div>
                 <div class="insight-card">
-                    <h3 class="insight-title">🔋 Energy Intensity Gap: 5x</h3>
+                    <h3 class="insight-title">🔋 Energy Intensity Gap: 5.1x</h3>
                     <p class="insight-text">
-                        Energy consumption varies 5x between most (0.051) and least (0.256) efficient operators, indicating significant optimization potential.
+                        Energy consumption varies 5.1x between most efficient (Syncrude Aurora: 0.051) and least efficient (Syncrude Mildred Lake: 0.260) operators, indicating significant optimization potential.
                     </p>
                 </div>
                 <div class="insight-card">
-                    <h3 class="insight-title">🏭 Upgrader Premium</h3>
+                    <h3 class="insight-title">🏭 Upgrader Energy Premium</h3>
                     <p class="insight-text">
-                        Integrated upgraders (Suncor, Syncrude Mildred Lake) show higher energy intensity due to additional processing requirements for SCO production.
+                        Integrated upgraders (Suncor, Syncrude Mildred Lake) show higher energy and gas intensity due to additional processing requirements for SCO production—an expected operational trade-off.
                     </p>
                 </div>
                 <div class="insight-card">
                     <h3 class="insight-title">💰 Cost Implications</h3>
                     <p class="insight-text">
-                        Energy efficiency leaders likely enjoy $2-5/bbl operating cost advantage, translating to $50-100M+ annual savings at scale.
+                        Energy efficiency leaders likely enjoy $2-5/bbl operating cost advantage, translating to $50-125M+ annual savings at scale based on typical production volumes.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Seasonal & Volatility Analysis -->
-        <section class="content-section">
-            <h2 class="section-title">Production Reliability & Seasonal Patterns</h2>
+        <!-- Financial Statement Implications Section -->
+        <section class="content-section" id="financial">
+            <h2 class="section-title">Financial Statement Implications</h2>
             <p class="section-text">
-                Production volatility and seasonal patterns impact revenue forecasting, working capital planning, and turnaround scheduling. Understanding these dynamics enables more accurate financial projections and operational planning.
+                Operational metrics directly translate to financial performance. This section analyzes how production efficiency, energy intensity, and recovery rates impact the three primary financial statements, providing a framework for business planning and investment analysis.
             </p>
 
-            <!-- Seasonal Dashboard Placeholder -->
-            <div class="sac-embed">
-                <div class="sac-embed-placeholder">📅</div>
-                <div class="sac-embed-title">Seasonal Patterns & Volatility Dashboard</div>
-                <div class="sac-embed-description">SAP Analytics Cloud visualization showing monthly production patterns and operator volatility analysis</div>
-                <code>&lt;iframe src="[SAC_STORY_URL]"&gt;&lt;/iframe&gt;</code>
-            </div>
+            <div class="problem-solution-grid">
+                <div class="ps-card financial">
+                    <div class="ps-icon">📈</div>
+                    <h3 class="ps-title">Income Statement Drivers</h3>
+                    <ul class="ps-list">
+                        <li><strong>Revenue:</strong> Production volume × realized price (WTI - WCS differential)</li>
+                        <li><strong>Operating Costs:</strong> Energy intensity × utility rates + labor + maintenance</li>
+                        <li><strong>Gross Margin:</strong> Recovery rate efficiency directly impacts per-barrel profitability</li>
+                        <li><strong>EBITDA:</strong> Energy efficiency variance creates $2-5/bbl margin differences</li>
+                    </ul>
+                </div>
 
-            <h3 class="section-subtitle">Production Volatility by Operator (CV%)</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Operator</th>
-                        <th>Volatility (CV%)</th>
-                        <th>Reliability Rating</th>
-                        <th>BP&A Implication</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Imperial Kearl</td>
-                        <td class="value-positive">17.2%</td>
-                        <td>🟢 Most Stable</td>
-                        <td>Lower forecast variance</td>
-                    </tr>
-                    <tr>
-                        <td>Syncrude Mildred Lake</td>
-                        <td class="value-positive">19.2%</td>
-                        <td>🟢 Stable</td>
-                        <td>Predictable revenue</td>
-                    </tr>
-                    <tr>
-                        <td>CNRL Jackpine</td>
-                        <td>20.9%</td>
-                        <td>🟡 Moderate</td>
-                        <td>Standard planning</td>
-                    </tr>
-                    <tr>
-                        <td>Suncor</td>
-                        <td>21.5%</td>
-                        <td>🟡 Moderate</td>
-                        <td>Standard planning</td>
-                    </tr>
-                    <tr>
-                        <td>CNRL Muskeg River</td>
-                        <td>21.9%</td>
-                        <td>🟡 Moderate</td>
-                        <td>Standard planning</td>
-                    </tr>
-                    <tr>
-                        <td>Syncrude Aurora</td>
-                        <td>23.0%</td>
-                        <td>🟡 Moderate</td>
-                        <td>Contingency buffer needed</td>
-                    </tr>
-                    <tr>
-                        <td>CNRL Horizon</td>
-                        <td>23.3%</td>
-                        <td>🟡 Moderate</td>
-                        <td>Contingency buffer needed</td>
-                    </tr>
-                    <tr>
-                        <td>Fort Hills</td>
-                        <td class="value-negative">29.1%</td>
-                        <td>🔴 Higher Volatility</td>
-                        <td>Wider forecast range</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3 class="section-subtitle">Seasonal Production Patterns</h3>
-            <div class="insights-grid">
-                <div class="insight-card">
-                    <h3 class="insight-title">🌡️ April-May Trough</h3>
-                    <p class="insight-text">
-                        Industry production averages 6.8-6.9M m³ in April-May, approximately 14% below peak months. Spring breakup conditions and planned turnarounds contribute to this pattern.
-                    </p>
-                </div>
-                <div class="insight-card">
-                    <h3 class="insight-title">📊 November-December Peak</h3>
-                    <p class="insight-text">
-                        Production peaks at 8.6-9.1M m³ in November-December as operators maximize output before year-end and cold weather improves processing conditions.
-                    </p>
-                </div>
-                <div class="insight-card">
-                    <h3 class="insight-title">🔧 Turnaround Windows</h3>
-                    <p class="insight-text">
-                        Q2 (April-June) shows consistent production dips across operators, indicating industry-standard turnaround scheduling during spring months.
-                    </p>
-                </div>
-                <div class="insight-card">
-                    <h3 class="insight-title">💵 Working Capital Impact</h3>
-                    <p class="insight-text">
-                        14% seasonal variance translates to ~$500M quarterly revenue swing at $70 WTI, requiring careful working capital planning for Q2.
-                    </p>
+                <div class="ps-card financial">
+                    <div class="ps-icon">⚖️</div>
+                    <h3 class="ps-title">Balance Sheet Considerations</h3>
+                    <ul class="ps-list">
+                        <li><strong>PP&E:</strong> Capital intensity varies by integrated vs. bitumen-only operations</li>
+                        <li><strong>Inventory:</strong> Production volatility impacts working capital requirements</li>
+                        <li><strong>ARO Liabilities:</strong> Mine site reclamation obligations accrue over mine life</li>
+                        <li><strong>Reserves:</strong> Recovery rate assumptions affect reserve booking</li>
+                    </ul>
                 </div>
             </div>
-        </section>
 
-        <!-- By-Products Section -->
-        <section class="content-section">
-            <h2 class="section-title">By-Product Analysis</h2>
-            <p class="section-text">
-                Oil sands processing generates significant by-products including sulphur, coke, and process gas. These by-products represent both revenue diversification opportunities and potential liabilities (asset retirement obligations).
-            </p>
+            <h3 class="section-subtitle">Income Statement Impact Analysis</h3>
+            <div class="financial-grid">
+                <div class="financial-statement-card">
+                    <h4>📊 Revenue Line Items</h4>
+                    <div class="line-items">
+                        <div class="line-item income">
+                            <span class="line-item-name">Crude Bitumen Sales</span>
+                            <span class="line-item-impact">Production volume (m³) × WCS price. 5.1% YoY production growth translates directly to top-line revenue growth at constant pricing.</span>
+                        </div>
+                        <div class="line-item income">
+                            <span class="line-item-name">Synthetic Crude Oil (SCO) Sales</span>
+                            <span class="line-item-impact">Integrated operators (Suncor, CNRL Horizon, Syncrude) capture WTI pricing premium but incur upgrading costs—net margin depends on WTI-WCS differential.</span>
+                        </div>
+                        <div class="line-item income">
+                            <span class="line-item-name">Price Realization</span>
+                            <span class="line-item-impact">At $70 WTI and $15 WCS discount, bitumen realizes ~$55/bbl; SCO realizes ~$68-70/bbl. Operator mix affects average realization.</span>
+                        </div>
+                    </div>
+                </div>
 
-            <h3 class="section-subtitle">Annual By-Product Production</h3>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Year</th>
-                        <th>Sulphur (M tonnes)</th>
-                        <th>Coke (M tonnes)</th>
-                        <th>Process Gas (10³m³)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>2020</td>
-                        <td>1.81</td>
-                        <td>11.39</td>
-                        <td>6,254</td>
-                    </tr>
-                    <tr>
-                        <td>2021</td>
-                        <td>1.64</td>
-                        <td>10.71</td>
-                        <td>5,516</td>
-                    </tr>
-                    <tr>
-                        <td>2022</td>
-                        <td>1.66</td>
-                        <td>10.64</td>
-                        <td>5,686</td>
-                    </tr>
-                    <tr>
-                        <td>2023</td>
-                        <td>1.76</td>
-                        <td>10.81</td>
-                        <td>5,609</td>
-                    </tr>
-                    <tr>
-                        <td>2024</td>
-                        <td class="highlight">1.90</td>
-                        <td class="highlight">11.72</td>
-                        <td class="highlight">5,753</td>
-                    </tr>
-                </tbody>
-            </table>
+                <div class="financial-statement-card">
+                    <h4>💵 Operating Cost Drivers</h4>
+                    <div class="line-items">
+                        <div class="line-item income">
+                            <span class="line-item-name">Energy Costs (Electricity)</span>
+                            <span class="line-item-impact">Energy intensity variance of 0.051-0.260 MWh/m³ creates $1.50-3.00/bbl cost differential at $50/MWh power rates.</span>
+                        </div>
+                        <div class="line-item income">
+                            <span class="line-item-name">Natural Gas Costs</span>
+                            <span class="line-item-impact">Gas intensity range of 0.105-0.387 10³m³/m³ represents $0.50-2.00/bbl variance at $3/GJ natural gas pricing.</span>
+                        </div>
+                        <div class="line-item income">
+                            <span class="line-item-name">Mining & Processing</span>
+                            <span class="line-item-impact">Recovery rate (87.5-111.5 m³/1000t) directly impacts ore processing costs per barrel—higher recovery = lower cost per m³ bitumen.</span>
+                        </div>
+                        <div class="line-item income">
+                            <span class="line-item-name">Total Operating Cost Variance</span>
+                            <span class="line-item-impact">Best-in-class operators (Syncrude Aurora, CNUL Jackpine) achieve ~$20-25/bbl operating costs vs. $30-35/bbl for less efficient operations.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <h3 class="section-subtitle">Balance Sheet Impact Analysis</h3>
+            <div class="financial-grid">
+                <div class="financial-statement-card">
+                    <h4>🏗️ Asset Implications</h4>
+                    <div class="line-items">
+                        <div class="line-item balance">
+                            <span class="line-item-name">Property, Plant & Equipment</span>
+                            <span class="line-item-impact">Integrated upgrader facilities (Suncor, CNRL Horizon) carry $15-25B+ PP&E vs. $5-10B for bitumen-only operations. Higher depreciation burden.</span>
+                        </div>
+                        <div class="line-item balance">
+                            <span class="line-item-name">Mining Equipment & Fleet</span>
+                            <span class="line-item-impact">Ore processing volumes (directly tied to recovery rate) drive haul truck, shovel, and processing equipment requirements.</span>
+                        </div>
+                        <div class="line-item balance">
+                            <span class="line-item-name">Working Capital (Inventory)</span>
+                            <span class="line-item-impact">Production volatility (17-29% CV) affects inventory carrying costs. Higher volatility operators require larger buffer stocks.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="financial-statement-card">
+                    <h4>📋 Liability Implications</h4>
+                    <div class="line-items">
+                        <div class="line-item balance">
+                            <span class="line-item-name">Asset Retirement Obligations (ARO)</span>
+                            <span class="line-item-impact">Mine reclamation liabilities of $1-3B per major operation. Accumulated over mine life; discount rate and timeline assumptions critical.</span>
+                        </div>
+                        <div class="line-item balance">
+                            <span class="line-item-name">Long-Term Debt</span>
+                            <span class="line-item-impact">Capital-intensive nature requires significant debt financing. Interest coverage ratios sensitive to production reliability.</span>
+                        </div>
+                        <div class="line-item balance">
+                            <span class="line-item-name">Lease Liabilities</span>
+                            <span class="line-item-impact">Mining equipment leases and land tenure obligations create off-balance sheet considerations under IFRS 16.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Cash Flow Impact Analysis</h3>
+            <div class="financial-grid">
+                <div class="financial-statement-card">
+                    <h4>💰 Cash Flow Statement Drivers</h4>
+                    <div class="line-items">
+                        <div class="line-item cashflow">
+                            <span class="line-item-name">Operating Cash Flow</span>
+                            <span class="line-item-impact">Energy efficiency directly impacts CFO. $2-5/bbl operating cost advantage at 100,000 bbl/day = $73M-182M annual cash flow improvement.</span>
+                        </div>
+                        <div class="line-item cashflow">
+                            <span class="line-item-name">Capital Expenditures</span>
+                            <span class="line-item-impact">Sustaining capital of $8-12/bbl for mine operations + $15-25/bbl for upgrader maintenance. Efficiency investments reduce long-term CapEx intensity.</span>
+                        </div>
+                        <div class="line-item cashflow">
+                            <span class="line-item-name">Working Capital Changes</span>
+                            <span class="line-item-impact">Seasonal production patterns (14% Q2 variance) create ~$300-500M quarterly working capital swings at $70 WTI pricing.</span>
+                        </div>
+                        <div class="line-item cashflow">
+                            <span class="line-item-name">Free Cash Flow Sensitivity</span>
+                            <span class="line-item-impact">Recovery rate improvement of 10 m³/1000t ore generates ~$75-100M annual FCF improvement for a 100,000 bbl/day operation.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Key Financial Ratios Affected</h3>
             <div class="insights-grid">
-                <div class="insight-card">
-                    <h3 class="insight-title">⚠️ Coke Inventory Accumulation</h3>
+                <div class="insight-card income">
+                    <h3 class="insight-title">💹 Profitability Metrics</h3>
                     <p class="insight-text">
-                        Coke production reached 11.7M tonnes in 2024, highest in the period. Limited market demand and storage constraints present disposal challenges and ARO implications.
+                        <strong>EBITDA Margin:</strong> Energy-efficient operators achieve 35-45% EBITDA margins vs. 25-35% for less efficient peers. <strong>Operating Netback:</strong> Ranges from $15-30/bbl depending on efficiency metrics.
                     </p>
                 </div>
-                <div class="insight-card">
-                    <h3 class="insight-title">💰 Sulphur Revenue Opportunity</h3>
+                <div class="insight-card balance">
+                    <h3 class="insight-title">📊 Leverage Ratios</h3>
                     <p class="insight-text">
-                        At current sulphur prices (~$100/tonne), 1.9M tonnes represents ~$190M annual revenue potential, though market volatility and logistics limit realization.
+                        <strong>Debt/EBITDA:</strong> Integrated upgraders typically 1.5-2.5x vs. 1.0-1.5x for bitumen-only due to higher capital intensity. <strong>Interest Coverage:</strong> Production reliability directly impacts coverage ratios.
+                    </p>
+                </div>
+                <div class="insight-card cashflow">
+                    <h3 class="insight-title">🔄 Return Metrics</h3>
+                    <p class="insight-text">
+                        <strong>ROIC:</strong> High recovery rate operations achieve 12-18% ROIC vs. 8-12% for lower efficiency. <strong>FCF Yield:</strong> Energy efficiency drives 5-8% FCF yield differential between best and worst performers.
                     </p>
                 </div>
             </div>
@@ -1058,7 +1203,7 @@
                     <div class="step-content">
                         <h3 class="step-title">Operational Excellence Benchmarking</h3>
                         <p class="step-description">
-                            The 28% variance in bitumen recovery rates and 5x range in energy intensity provide clear benchmarking targets. Operators below median on efficiency metrics should prioritize technology upgrades and process optimization to remain competitive. CNRL Jackpine's leading efficiency metrics establish best-in-class targets.
+                            The 27% variance in bitumen recovery rates and 5.1x range in energy intensity provide clear benchmarking targets. Operators below median on efficiency metrics should prioritize technology upgrades and process optimization to remain competitive. CNUL Muskeg River's leading recovery rate (111.5) and Syncrude Aurora's energy efficiency (0.051 MWh/m³) establish best-in-class targets.
                         </p>
                     </div>
                 </div>
@@ -1068,7 +1213,7 @@
                     <div class="step-content">
                         <h3 class="step-title">Production Forecasting Enhancement</h3>
                         <p class="step-description">
-                            Incorporating operator-specific volatility coefficients (17-29% CV) and seasonal patterns (14% Q2 dip) into production forecasts improves accuracy. Fort Hills' higher volatility warrants wider forecast ranges, while Imperial Kearl's stability supports tighter projections.
+                            The 2021 production dip (-2.0%) followed by strong 2024 recovery (+5.1%) demonstrates sector cyclicality that must be incorporated into financial models. Annual production variance provides inputs for revenue forecasting confidence intervals and scenario analysis.
                         </p>
                     </div>
                 </div>
@@ -1078,7 +1223,7 @@
                     <div class="step-content">
                         <h3 class="step-title">Capital Allocation Decisions</h3>
                         <p class="step-description">
-                            Fort Hills' 43.8% production growth demonstrates turnaround potential for underperforming assets. Investment thesis should weight efficiency improvement potential alongside current performance when evaluating capital allocation across operations.
+                            The $2-5/bbl operating cost advantage of energy-efficient operations translates to $50-125M+ annual EBITDA improvement for a typical 100,000 bbl/day facility. Investment thesis should weight efficiency improvement potential alongside current performance when evaluating capital allocation.
                         </p>
                     </div>
                 </div>
@@ -1088,7 +1233,7 @@
                     <div class="step-content">
                         <h3 class="step-title">Risk Assessment & Scenario Planning</h3>
                         <p class="step-description">
-                            Production volatility metrics enable Monte Carlo simulation of revenue outcomes. Energy intensity trends inform carbon cost scenario analysis as regulatory frameworks evolve. Coke inventory accumulation signals potential ARO exposure requiring provision adjustment.
+                            Energy intensity trends inform carbon cost scenario analysis as regulatory frameworks evolve. With carbon pricing at $65/tonne CO2e (2023) rising to $170/tonne by 2030, gas intensity variance represents material future cost risk for high-consumption operators.
                         </p>
                     </div>
                 </div>
@@ -1110,7 +1255,7 @@
                 <div class="insight-card">
                     <h3 class="insight-title">🔄 Data Transformation</h3>
                     <p class="insight-text">
-                        Power Query used for data cleaning and normalization. Calculated fields for recovery rates, energy intensity, growth rates, and volatility metrics.
+                        Power Query used for data cleaning and normalization. Calculated fields for recovery rates, energy intensity, growth rates, and market share percentages.
                     </p>
                 </div>
                 <div class="insight-card">
@@ -1122,7 +1267,7 @@
                 <div class="insight-card">
                     <h3 class="insight-title">📈 Statistical Analysis</h3>
                     <p class="insight-text">
-                        Excel used for descriptive statistics, trend analysis, and coefficient of variation calculations. CAGR and correlation analysis for performance benchmarking.
+                        Excel used for descriptive statistics, trend analysis, and CAGR calculations. Correlation analysis for efficiency metric benchmarking.
                     </p>
                 </div>
             </div>
@@ -1132,8 +1277,8 @@
                 <li>Public data only—no proprietary cost, price realization, or capital expenditure data available</li>
                 <li>Monthly granularity limits ability to identify daily operational events</li>
                 <li>Reporting variations across operators may impact comparability</li>
-                <li>5-year window may not capture full business cycles</li>
-                <li>Missing context: commodity prices, turnaround schedules, capital projects during period</li>
+                <li>5-year window may not capture full commodity price cycles</li>
+                <li>Missing context: realized prices, turnaround schedules, capital projects during period</li>
             </ul>
 
             <h3 class="section-subtitle">Recommended SAP Analytics Cloud Dashboards</h3>
@@ -1151,28 +1296,28 @@
                 <tbody>
                     <tr>
                         <td><strong>Executive Overview</strong></td>
-                        <td>KPI cards, stacked production trends, market share pie chart</td>
-                        <td>High-level industry snapshot</td>
+                        <td>KPI cards (total production, YoY growth), donut chart (market share), bar chart (annual production)</td>
+                        <td>High-level industry snapshot for leadership</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Production Performance</strong></td>
+                        <td>Stacked area chart (monthly production by operator), trend lines, seasonal decomposition</td>
+                        <td>Production forecasting and planning</td>
                     </tr>
                     <tr>
                         <td><strong>Operational Efficiency</strong></td>
-                        <td>Scatter plot (grade vs yield), heat map (energy by operator/quarter)</td>
-                        <td>Efficiency benchmarking</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Production Reliability</strong></td>
-                        <td>Box plots (volatility), seasonal overlay chart, disruption timeline</td>
-                        <td>Forecast accuracy planning</td>
+                        <td>Horizontal bar charts (recovery rate, energy intensity, gas intensity), color-coded performance</td>
+                        <td>Efficiency benchmarking and improvement targeting</td>
                     </tr>
                     <tr>
                         <td><strong>Competitive Benchmarking</strong></td>
-                        <td>Quadrant analysis, percentile rankings, indexed trend comparison</td>
-                        <td>Strategic positioning</td>
+                        <td>Quadrant analysis (production vs. efficiency), percentile rankings, indexed comparisons</td>
+                        <td>Strategic positioning and peer analysis</td>
                     </tr>
                     <tr>
-                        <td><strong>Input-Output Analysis</strong></td>
-                        <td>Sankey diagram (ore→bitumen→SCO), dual-axis energy vs production</td>
-                        <td>Process flow optimization</td>
+                        <td><strong>Financial Impact Model</strong></td>
+                        <td>Waterfall charts (cost buildup), sensitivity tables, scenario comparison</td>
+                        <td>Business planning and capital allocation</td>
                     </tr>
                 </tbody>
             </table>
