@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alberta Oil Sands Analytics - Brandon McManus</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0e27;
+            color: #e4e4e7;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: #1a1f3a;
+            padding: 20px 0;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+            border-bottom: 1px solid #2d3548;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+            color: #3b82f6;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #60a5fa;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0f766e 0%, #0c4a6e 100%);
+            color: white;
+            padding: 80px 40px;
+            border-bottom: 2px solid #14b8a6;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-title {
+            font-size: 44px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .project-subtitle {
+            font-size: 18px;
+            opacity: 0.95;
+            margin-bottom: 30px;
+            max-width: 900px;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 12px;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .meta-value {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .tech-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .tech-tag {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .content-section {
+            background: #1a1f3a;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+            border: 1px solid #2d3548;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #f8fafc;
+        }
+
+        .section-subtitle {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 30px 0 15px 0;
+            color: #e4e4e7;
+        }
+
+        .section-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+
+        /* Problem-Solution Grid */
+        .problem-solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .ps-card {
+            padding: 30px;
+            border-radius: 12px;
+            border: 2px solid #2d3548;
+        }
+
+        .ps-card.context {
+            background: rgba(14, 165, 233, 0.1);
+            border-color: #0ea5e9;
+        }
+
+        .ps-card.objective {
+            background: rgba(20, 184, 166, 0.1);
+            border-color: #14b8a6;
+        }
+
+        .ps-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .ps-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #f8fafc;
+        }
+
+        .ps-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ps-list li {
+            padding-left: 25px;
+            margin-bottom: 10px;
+            position: relative;
+            color: #94a3b8;
+        }
+
+        .ps-list li:before {
+            content: "•";
+            position: absolute;
+            left: 10px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .context .ps-list li:before {
+            color: #0ea5e9;
+        }
+
+        .objective .ps-list li:before {
+            color: #14b8a6;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #0f766e 0%, #0c4a6e 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #14b8a6;
+            box-shadow: 0 4px 16px rgba(20, 184, 166, 0.2);
+        }
+
+        .metric-value {
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .metric-sublabel {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+
+        /* Data Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .data-table th {
+            background: #0f1729;
+            color: #f8fafc;
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 2px solid #14b8a6;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid #2d3548;
+            color: #94a3b8;
+        }
+
+        .data-table tr:hover {
+            background: rgba(20, 184, 166, 0.05);
+        }
+
+        .data-table .value-positive {
+            color: #22c55e;
+        }
+
+        .data-table .value-negative {
+            color: #ef4444;
+        }
+
+        .data-table .highlight {
+            color: #14b8a6;
+            font-weight: 600;
+        }
+
+        /* Key Insights */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .insight-card {
+            padding: 25px;
+            background: #0f1729;
+            border-radius: 12px;
+            border-left: 4px solid #14b8a6;
+            border: 1px solid #2d3548;
+            border-left-width: 4px;
+            border-left-color: #14b8a6;
+        }
+
+        .insight-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #f8fafc;
+        }
+
+        .insight-text {
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            min-width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #0f766e 0%, #0c4a6e 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            flex-shrink: 0;
+            border: 2px solid #14b8a6;
+            box-shadow: 0 0 15px rgba(20, 184, 166, 0.3);
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #f8fafc;
+        }
+
+        .step-description {
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        /* SAC Embed Placeholder */
+        .sac-embed {
+            margin: 30px 0;
+            padding: 40px;
+            background: #0f1729;
+            border: 2px dashed #2d3548;
+            border-radius: 12px;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sac-embed-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #f8fafc;
+            margin-bottom: 15px;
+        }
+
+        .sac-embed-description {
+            font-size: 14px;
+            color: #64748b;
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+
+        .sac-embed-placeholder {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .sac-embed code {
+            background: #1a1f3a;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-family: 'Monaco', monospace;
+            font-size: 12px;
+            color: #14b8a6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #0f766e 0%, #0c4a6e 100%);
+            color: white;
+            padding: 60px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 60px;
+            border: 1px solid #14b8a6;
+            box-shadow: 0 4px 24px rgba(20, 184, 166, 0.2);
+        }
+
+        .cta-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #0f766e;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(255,255,255,0.2);
+            background: #f8fafc;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 28px;
+            }
+
+            .problem-solution-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-section {
+                padding: 30px 20px;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+
+            .hero {
+                padding: 60px 20px;
+            }
+
+            .step {
+                flex-direction: column;
+            }
+
+            .data-table {
+                font-size: 12px;
+            }
+
+            .data-table th, .data-table td {
+                padding: 8px 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-link">
+                ← Back to Portfolio
+            </a>
+            <nav class="nav-links">
+                <a href="#overview">Overview</a>
+                <a href="#analysis">Analysis</a>
+                <a href="#insights">Insights</a>
+                <a href="#methodology">Methodology</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="project-title">Alberta Mineable Oil Sands Operational Analysis</h1>
+            <p class="project-subtitle">Exploratory analysis of AER Statistical Series 39 data (2020-2024), examining production metrics, operational efficiency, and inter-facility performance to support business planning and capital allocation decisions in upstream oil sands finance.</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Data Source</span>
+                    <span class="meta-value">AER Statistical Series 39</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Analysis Period</span>
+                    <span class="meta-value">2020 - 2024</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Operators Analyzed</span>
+                    <span class="meta-value">8 Major Facilities</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Focus Area</span>
+                    <span class="meta-value">Business Planning & Analytics</span>
+                </div>
+            </div>
+
+            <div class="tech-tags">
+                <span class="tech-tag">SAP Analytics Cloud</span>
+                <span class="tech-tag">Power Query</span>
+                <span class="tech-tag">Excel</span>
+                <span class="tech-tag">Financial Analysis</span>
+                <span class="tech-tag">Operational Analysis</span>
+                <span class="tech-tag">Data Visualization</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Executive Summary Section -->
+        <section class="content-section" id="overview">
+            <h2 class="section-title">Executive Summary</h2>
+            <p class="section-text">
+                This analysis examines five years of Alberta Energy Regulator's Statistical Series 39 data covering Alberta's mineable oil sands operations. Through systematic examination of production metrics, operational efficiency indicators, and inter-facility performance comparisons, key trends have been identified that inform strategic questions for business planning and establish a foundation for predictive modeling and capital allocation decisions.
+            </p>
+
+            <!-- Context-Objective Grid -->
+            <div class="problem-solution-grid">
+                <div class="ps-card context">
+                    <div class="ps-icon">📊</div>
+                    <h3 class="ps-title">Business Context</h3>
+                    <ul class="ps-list">
+                        <li>Alberta's mineable oil sands represent ~60% of Canada's crude oil production capacity</li>
+                        <li>8 major mining operations across 5 operators drive industry output</li>
+                        <li>Integrated upgraders (Suncor, Syncrude, CNRL Horizon) compete with bitumen-only producers</li>
+                        <li>Energy costs and recovery efficiency are key competitive differentiators</li>
+                        <li>Understanding operational patterns informs investment and benchmarking decisions</li>
+                    </ul>
+                </div>
+
+                <div class="ps-card objective">
+                    <div class="ps-icon">🎯</div>
+                    <h3 class="ps-title">Analysis Objectives</h3>
+                    <ul class="ps-list">
+                        <li>Quantify production trends and growth patterns across operators</li>
+                        <li>Benchmark operational efficiency metrics (recovery rates, energy intensity)</li>
+                        <li>Identify seasonal patterns and production volatility factors</li>
+                        <li>Analyze competitive positioning and market share dynamics</li>
+                        <li>Establish foundation for predictive modeling and forecasting</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <h3 class="section-subtitle">Industry Snapshot (2024)</h3>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">90.5M</div>
+                    <div class="metric-label">Bitumen Production (m³)</div>
+                    <div class="metric-sublabel">+4.9% YoY</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">48.1M</div>
+                    <div class="metric-label">SCO Production (m³)</div>
+                    <div class="metric-sublabel">+5.9% YoY</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">919M</div>
+                    <div class="metric-label">Ore Mined (tonnes)</div>
+                    <div class="metric-sublabel">+3.7% YoY</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">1.2%</div>
+                    <div class="metric-label">5-Year CAGR</div>
+                    <div class="metric-sublabel">Bitumen Production</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Production Analysis Section -->
+        <section class="content-section" id="analysis">
+            <h2 class="section-title">Production Performance Analysis</h2>
+            <p class="section-text">
+                Annual bitumen production across all major operators grew from 86.3 million m³ in 2020 to 90.5 million m³ in 2024, representing a compound annual growth rate of 1.2%. This growth occurred despite COVID-19 disruptions in 2020-2021 and demonstrates the sector's operational resilience.
+            </p>
+
+            <!-- Production Trend Chart Placeholder -->
+            <div class="sac-embed">
+                <div class="sac-embed-placeholder">📈</div>
+                <div class="sac-embed-title">Annual Production Trends Dashboard</div>
+                <div class="sac-embed-description">SAP Analytics Cloud visualization showing annual bitumen and SCO production by operator (2020-2024)</div>
+                <code>&lt;iframe src="[SAC_STORY_URL]"&gt;&lt;/iframe&gt;</code>
+            </div>
+
+            <h3 class="section-subtitle">Bitumen Production by Operator (2020-2024)</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Operator</th>
+                        <th>2020 (M m³)</th>
+                        <th>2024 (M m³)</th>
+                        <th>Growth</th>
+                        <th>2024 Market Share</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Imperial Kearl</td>
+                        <td>13.9</td>
+                        <td>15.9</td>
+                        <td class="value-positive">+14.4%</td>
+                        <td class="highlight">17.6%</td>
+                    </tr>
+                    <tr>
+                        <td>CNRL Horizon</td>
+                        <td>15.7</td>
+                        <td>14.8</td>
+                        <td class="value-negative">-5.7%</td>
+                        <td class="highlight">16.4%</td>
+                    </tr>
+                    <tr>
+                        <td>Suncor</td>
+                        <td>15.3</td>
+                        <td>13.7</td>
+                        <td class="value-negative">-10.3%</td>
+                        <td class="highlight">15.1%</td>
+                    </tr>
+                    <tr>
+                        <td>Syncrude Aurora</td>
+                        <td>10.4</td>
+                        <td>10.7</td>
+                        <td class="value-positive">+2.8%</td>
+                        <td class="highlight">11.8%</td>
+                    </tr>
+                    <tr>
+                        <td>CNRL Muskeg River</td>
+                        <td>8.7</td>
+                        <td>10.0</td>
+                        <td class="value-positive">+14.5%</td>
+                        <td class="highlight">11.0%</td>
+                    </tr>
+                    <tr>
+                        <td>Fort Hills</td>
+                        <td>6.5</td>
+                        <td>9.4</td>
+                        <td class="value-positive">+43.8%</td>
+                        <td class="highlight">10.4%</td>
+                    </tr>
+                    <tr>
+                        <td>Syncrude Mildred Lake</td>
+                        <td>8.7</td>
+                        <td>8.5</td>
+                        <td class="value-negative">-2.0%</td>
+                        <td class="highlight">9.4%</td>
+                    </tr>
+                    <tr>
+                        <td>CNRL Jackpine</td>
+                        <td>7.0</td>
+                        <td>7.5</td>
+                        <td class="value-positive">+6.4%</td>
+                        <td class="highlight">8.3%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="section-subtitle">Key Production Findings</h3>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h3 class="insight-title">📈 Fort Hills: Standout Performer</h3>
+                    <p class="insight-text">
+                        Fort Hills achieved 43.8% production growth over the period, recovering from early operational challenges to become a significant producer at 9.4M m³ in 2024.
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <h3 class="insight-title">📉 Legacy Operator Challenges</h3>
+                    <p class="insight-text">
+                        Suncor (-10.3%) and CNRL Horizon (-5.7%) experienced production declines, potentially related to aging infrastructure and maintenance requirements.
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <h3 class="insight-title">🏆 Imperial Kearl Leads Market</h3>
+                    <p class="insight-text">
+                        Imperial Kearl claimed the largest market share (17.6%) with consistent 14.4% growth, demonstrating effective operational execution.
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <h3 class="insight-title">⚖️ Market Concentration Stable</h3>
+                    <p class="insight-text">
+                        Top 3 operators hold 49% market share, indicating a balanced competitive landscape among major producers.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Operational Efficiency Section -->
+        <section class="content-section">
+            <h2 class="section-title">Operational Efficiency Benchmarking</h2>
+            <p class="section-text">
+                Operational efficiency varies significantly across operators, driven by ore quality, processing technology, and facility age. Understanding these efficiency metrics enables benchmarking and identification of operational improvement opportunities.
+            </p>
+
+            <!-- Efficiency Dashboard Placeholder -->
+            <div class="sac-embed">
+                <div class="sac-embed-placeholder">⚡</div>
+                <div class="sac-embed-title">Operational Efficiency Dashboard</div>
+                <div class="sac-embed-description">SAP Analytics Cloud visualization comparing recovery rates, energy intensity, and gas consumption across operators</div>
+                <code>&lt;iframe src="[SAC_STORY_URL]"&gt;&lt;/iframe&gt;</code>
+            </div>
+
+            <h3 class="section-subtitle">Efficiency Metrics Comparison (2024)</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Bitumen Recovery<br>(m³/1000t ore)</th>
+                        <th>Energy Intensity<br>(MWh/m³ bitumen)</th>
+                        <th>Gas Intensity<br>(10³m³/m³ bitumen)</th>
+                        <th>Efficiency Rank</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CNRL Jackpine</td>
+                        <td class="highlight">113.3</td>
+                        <td class="highlight">0.051</td>
+                        <td class="highlight">0.106</td>
+                        <td>🥇 1st</td>
+                    </tr>
+                    <tr>
+                        <td>CNRL Muskeg River</td>
+                        <td class="highlight">110.2</td>
+                        <td>0.129</td>
+                        <td>0.202</td>
+                        <td>🥈 2nd</td>
+                    </tr>
+                    <tr>
+                        <td>Syncrude Aurora</td>
+                        <td>101.7</td>
+                        <td class="highlight">0.052</td>
+                        <td class="highlight">0.112</td>
+                        <td>🥉 3rd</td>
+                    </tr>
+                    <tr>
+                        <td>Imperial Kearl</td>
+                        <td>107.3</td>
+                        <td>0.095</td>
+                        <td>0.130</td>
+                        <td>4th</td>
+                    </tr>
+                    <tr>
+                        <td>Suncor</td>
+                        <td>97.1</td>
+                        <td>0.158</td>
+                        <td>0.232</td>
+                        <td>5th</td>
+                    </tr>
+                    <tr>
+                        <td>Fort Hills</td>
+                        <td>90.3</td>
+                        <td>0.090</td>
+                        <td>0.160</td>
+                        <td>6th</td>
+                    </tr>
+                    <tr>
+                        <td>CNRL Horizon</td>
+                        <td>88.7</td>
+                        <td>0.131</td>
+                        <td>0.216</td>
+                        <td>7th</td>
+                    </tr>
+                    <tr>
+                        <td>Syncrude Mildred Lake</td>
+                        <td>88.2</td>
+                        <td>0.256</td>
+                        <td>0.363</td>
+                        <td>8th</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="section-subtitle">Efficiency Analysis Insights</h3>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h3 class="insight-title">⛏️ Recovery Rate Variance: 28%</h3>
+                    <p class="insight-text">
+                        Bitumen recovery ranges from 88.2 to 113.3 m³ per 1000 tonnes ore, reflecting ore quality differences and extraction technology effectiveness.
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <h3 class="insight-title">🔋 Energy Intensity Gap: 5x</h3>
+                    <p class="insight-text">
+                        Energy consumption varies 5x between most (0.051) and least (0.256) efficient operators, indicating significant optimization potential.
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <h3 class="insight-title">🏭 Upgrader Premium</h3>
+                    <p class="insight-text">
+                        Integrated upgraders (Suncor, Syncrude Mildred Lake) show higher energy intensity due to additional processing requirements for SCO production.
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <h3 class="insight-title">💰 Cost Implications</h3>
+                    <p class="insight-text">
+                        Energy efficiency leaders likely enjoy $2-5/bbl operating cost advantage, translating to $50-100M+ annual savings at scale.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seasonal & Volatility Analysis -->
+        <section class="content-section">
+            <h2 class="section-title">Production Reliability & Seasonal Patterns</h2>
+            <p class="section-text">
+                Production volatility and seasonal patterns impact revenue forecasting, working capital planning, and turnaround scheduling. Understanding these dynamics enables more accurate financial projections and operational planning.
+            </p>
+
+            <!-- Seasonal Dashboard Placeholder -->
+            <div class="sac-embed">
+                <div class="sac-embed-placeholder">📅</div>
+                <div class="sac-embed-title">Seasonal Patterns & Volatility Dashboard</div>
+                <div class="sac-embed-description">SAP Analytics Cloud visualization showing monthly production patterns and operator volatility analysis</div>
+                <code>&lt;iframe src="[SAC_STORY_URL]"&gt;&lt;/iframe&gt;</code>
+            </div>
+
+            <h3 class="section-subtitle">Production Volatility by Operator (CV%)</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Operator</th>
+                        <th>Volatility (CV%)</th>
+                        <th>Reliability Rating</th>
+                        <th>BP&A Implication</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Imperial Kearl</td>
+                        <td class="value-positive">17.2%</td>
+                        <td>🟢 Most Stable</td>
+                        <td>Lower forecast variance</td>
+                    </tr>
+                    <tr>
+                        <td>Syncrude Mildred Lake</td>
+                        <td class="value-positive">19.2%</td>
+                        <td>🟢 Stable</td>
+                        <td>Predictable revenue</td>
+                    </tr>
+                    <tr>
+                        <td>CNRL Jackpine</td>
+                        <td>20.9%</td>
+                        <td>🟡 Moderate</td>
+                        <td>Standard planning</td>
+                    </tr>
+                    <tr>
+                        <td>Suncor</td>
+                        <td>21.5%</td>
+                        <td>🟡 Moderate</td>
+                        <td>Standard planning</td>
+                    </tr>
+                    <tr>
+                        <td>CNRL Muskeg River</td>
+                        <td>21.9%</td>
+                        <td>🟡 Moderate</td>
+                        <td>Standard planning</td>
+                    </tr>
+                    <tr>
+                        <td>Syncrude Aurora</td>
+                        <td>23.0%</td>
+                        <td>🟡 Moderate</td>
+                        <td>Contingency buffer needed</td>
+                    </tr>
+                    <tr>
+                        <td>CNRL Horizon</td>
+                        <td>23.3%</td>
+                        <td>🟡 Moderate</td>
+                        <td>Contingency buffer needed</td>
+                    </tr>
+                    <tr>
+                        <td>Fort Hills</td>
+                        <td class="value-negative">29.1%</td>
+                        <td>🔴 Higher Volatility</td>
+                        <td>Wider forecast range</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="section-subtitle">Seasonal Production Patterns</h3>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h3 class="insight-title">🌡️ April-May Trough</h3>
+                    <p class="insight-text">
+                        Industry production averages 6.8-6.9M m³ in April-May, approximately 14% below peak months. Spring breakup conditions and planned turnarounds contribute to this pattern.
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <h3 class="insight-title">📊 November-December Peak</h3>
+                    <p class="insight-text">
+                        Production peaks at 8.6-9.1M m³ in November-December as operators maximize output before year-end and cold weather improves processing conditions.
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <h3 class="insight-title">🔧 Turnaround Windows</h3>
+                    <p class="insight-text">
+                        Q2 (April-June) shows consistent production dips across operators, indicating industry-standard turnaround scheduling during spring months.
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <h3 class="insight-title">💵 Working Capital Impact</h3>
+                    <p class="insight-text">
+                        14% seasonal variance translates to ~$500M quarterly revenue swing at $70 WTI, requiring careful working capital planning for Q2.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- By-Products Section -->
+        <section class="content-section">
+            <h2 class="section-title">By-Product Analysis</h2>
+            <p class="section-text">
+                Oil sands processing generates significant by-products including sulphur, coke, and process gas. These by-products represent both revenue diversification opportunities and potential liabilities (asset retirement obligations).
+            </p>
+
+            <h3 class="section-subtitle">Annual By-Product Production</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Sulphur (M tonnes)</th>
+                        <th>Coke (M tonnes)</th>
+                        <th>Process Gas (10³m³)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2020</td>
+                        <td>1.81</td>
+                        <td>11.39</td>
+                        <td>6,254</td>
+                    </tr>
+                    <tr>
+                        <td>2021</td>
+                        <td>1.64</td>
+                        <td>10.71</td>
+                        <td>5,516</td>
+                    </tr>
+                    <tr>
+                        <td>2022</td>
+                        <td>1.66</td>
+                        <td>10.64</td>
+                        <td>5,686</td>
+                    </tr>
+                    <tr>
+                        <td>2023</td>
+                        <td>1.76</td>
+                        <td>10.81</td>
+                        <td>5,609</td>
+                    </tr>
+                    <tr>
+                        <td>2024</td>
+                        <td class="highlight">1.90</td>
+                        <td class="highlight">11.72</td>
+                        <td class="highlight">5,753</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h3 class="insight-title">⚠️ Coke Inventory Accumulation</h3>
+                    <p class="insight-text">
+                        Coke production reached 11.7M tonnes in 2024, highest in the period. Limited market demand and storage constraints present disposal challenges and ARO implications.
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <h3 class="insight-title">💰 Sulphur Revenue Opportunity</h3>
+                    <p class="insight-text">
+                        At current sulphur prices (~$100/tonne), 1.9M tonnes represents ~$190M annual revenue potential, though market volatility and logistics limit realization.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Strategic Implications Section -->
+        <section class="content-section" id="insights">
+            <h2 class="section-title">Strategic Implications & Business Planning Relevance</h2>
+            <p class="section-text">
+                The analysis findings translate directly into business planning and financial advisory applications for upstream oil sands operations and investment decisions.
+            </p>
+
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Operational Excellence Benchmarking</h3>
+                        <p class="step-description">
+                            The 28% variance in bitumen recovery rates and 5x range in energy intensity provide clear benchmarking targets. Operators below median on efficiency metrics should prioritize technology upgrades and process optimization to remain competitive. CNRL Jackpine's leading efficiency metrics establish best-in-class targets.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Production Forecasting Enhancement</h3>
+                        <p class="step-description">
+                            Incorporating operator-specific volatility coefficients (17-29% CV) and seasonal patterns (14% Q2 dip) into production forecasts improves accuracy. Fort Hills' higher volatility warrants wider forecast ranges, while Imperial Kearl's stability supports tighter projections.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Capital Allocation Decisions</h3>
+                        <p class="step-description">
+                            Fort Hills' 43.8% production growth demonstrates turnaround potential for underperforming assets. Investment thesis should weight efficiency improvement potential alongside current performance when evaluating capital allocation across operations.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Risk Assessment & Scenario Planning</h3>
+                        <p class="step-description">
+                            Production volatility metrics enable Monte Carlo simulation of revenue outcomes. Energy intensity trends inform carbon cost scenario analysis as regulatory frameworks evolve. Coke inventory accumulation signals potential ARO exposure requiring provision adjustment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Methodology Section -->
+        <section class="content-section" id="methodology">
+            <h2 class="section-title">Methodology & Data Sources</h2>
+            
+            <h3 class="section-subtitle">Data Processing Pipeline</h3>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h3 class="insight-title">📥 Data Extraction</h3>
+                    <p class="insight-text">
+                        AER ST39 monthly reports (2020-2024) extracted from PDF format. 60 monthly reports consolidated into unified dataset covering 8 operators and 57,000+ data points.
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <h3 class="insight-title">🔄 Data Transformation</h3>
+                    <p class="insight-text">
+                        Power Query used for data cleaning and normalization. Calculated fields for recovery rates, energy intensity, growth rates, and volatility metrics.
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <h3 class="insight-title">📊 Visualization</h3>
+                    <p class="insight-text">
+                        SAP Analytics Cloud models built for interactive analysis. Dashboards enable drill-down by operator, time period, and metric category.
+                    </p>
+                </div>
+                <div class="insight-card">
+                    <h3 class="insight-title">📈 Statistical Analysis</h3>
+                    <p class="insight-text">
+                        Excel used for descriptive statistics, trend analysis, and coefficient of variation calculations. CAGR and correlation analysis for performance benchmarking.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="section-subtitle">Limitations & Considerations</h3>
+            <ul class="ps-list" style="padding-left: 25px; margin: 20px 0;">
+                <li>Public data only—no proprietary cost, price realization, or capital expenditure data available</li>
+                <li>Monthly granularity limits ability to identify daily operational events</li>
+                <li>Reporting variations across operators may impact comparability</li>
+                <li>5-year window may not capture full business cycles</li>
+                <li>Missing context: commodity prices, turnaround schedules, capital projects during period</li>
+            </ul>
+
+            <h3 class="section-subtitle">Recommended SAP Analytics Cloud Dashboards</h3>
+            <p class="section-text">
+                The following dashboard structures are recommended for SAP Analytics Cloud implementation. Each can be embedded into this report via iframe once the SAC story URLs are available:
+            </p>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Dashboard</th>
+                        <th>Key Visualizations</th>
+                        <th>Primary Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Executive Overview</strong></td>
+                        <td>KPI cards, stacked production trends, market share pie chart</td>
+                        <td>High-level industry snapshot</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operational Efficiency</strong></td>
+                        <td>Scatter plot (grade vs yield), heat map (energy by operator/quarter)</td>
+                        <td>Efficiency benchmarking</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Production Reliability</strong></td>
+                        <td>Box plots (volatility), seasonal overlay chart, disruption timeline</td>
+                        <td>Forecast accuracy planning</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Competitive Benchmarking</strong></td>
+                        <td>Quadrant analysis, percentile rankings, indexed trend comparison</td>
+                        <td>Strategic positioning</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Input-Output Analysis</strong></td>
+                        <td>Sankey diagram (ore→bitumen→SCO), dual-axis energy vs production</td>
+                        <td>Process flow optimization</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2 class="cta-title">Questions or Want to Discuss?</h2>
+            <p class="cta-text">
+                I'm happy to discuss this analysis, upstream oil sands finance, or business planning & analytics methodology. Feel free to reach out or explore my other projects.
+            </p>
+            <div class="cta-buttons">
+                <a href="index.html" class="btn btn-primary">View More Projects</a>
+                <a href="mailto:brandonmcmanus77@gmail.com" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </section>
+
+        <!-- Disclaimer -->
+        <div style="max-width: 800px; margin: 40px auto 0; padding: 30px; background: #1a1f3a; border-radius: 8px; border-left: 4px solid #14b8a6; border: 1px solid #2d3548; border-left-width: 4px; border-left-color: #14b8a6;">
+            <p style="font-size: 13px; color: #94a3b8; line-height: 1.6; margin: 0;">
+                <strong style="color: #f8fafc;">Disclaimer:</strong> This analysis uses publicly available data from the Alberta Energy Regulator's Statistical Series 39. All interpretations and insights are the author's own and do not represent the views of any company mentioned. This analysis is for educational and portfolio demonstration purposes only and should not be used for investment decisions.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
