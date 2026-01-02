@@ -753,7 +753,7 @@
             <h3 class="section-subtitle">Industry Snapshot (2020-2024)</h3>
             <div class="metrics-grid">
                 <div class="metric-card">
-                    <div class="metric-value">499.8M</div>
+                    <div class="metric-value">433.4M</div>
                     <div class="metric-label">Total Bitumen Production (m³)</div>
                     <div class="metric-sublabel">5-Year Cumulative</div>
                 </div>
@@ -924,7 +924,7 @@
                 <div class="screenshot">
                     <img src="Images/Oil-Sands-Analysis/operational-efficiency-analysis.png" alt="Operational Efficiency Analysis Dashboard">
                     <div class="screenshot-caption">
-                        <strong>Operational Efficiency Analysis Dashboard:</strong> SAP Analytics Cloud visualization showing bitumen recovery rates (m³/1000t ore), energy intensity (MWh/m³ bitumen), and gas intensity (10³m³/m³ bitumen) across operators. Color coding indicates performance—blue bars show recovery rates, red bars indicate higher energy/gas consumption, green indicates efficient consumption.
+                        <strong>Operational Efficiency Analysis Dashboard:</strong> SAP Analytics Cloud visualization showing bitumen recovery rates (m³/1000t ore), energy intensity (MWh/m³ bitumen), and gas intensity (10³m³/m³ bitumen) across operators.
                     </div>
                 </div>
             </div>
@@ -1015,12 +1015,6 @@
                     </p>
                 </div>
                 <div class="insight-card">
-                    <h3 class="insight-title">🏭 Upgrader Energy Premium</h3>
-                    <p class="insight-text">
-                        Integrated upgraders (Suncor, Syncrude Mildred Lake) show higher energy and gas intensity due to additional processing requirements for SCO production—an expected operational trade-off.
-                    </p>
-                </div>
-                <div class="insight-card">
                     <h3 class="insight-title">💰 Cost Implications</h3>
                     <p class="insight-text">
                         Energy efficiency leaders likely enjoy $2-5/bbl operating cost advantage, translating to $50-125M+ annual savings at scale based on typical production volumes.
@@ -1031,163 +1025,187 @@
 
         <!-- Financial Statement Implications Section -->
         <section class="content-section" id="financial">
-            <h2 class="section-title">Financial Statement Implications</h2>
+            <h2 class="section-title">Financial Statement Implications for FP&A</h2>
             <p class="section-text">
-                Operational metrics directly translate to financial performance. This section analyzes how production efficiency, energy intensity, and recovery rates impact the three primary financial statements, providing a framework for business planning and investment analysis.
+                This section translates AER ST39 operational data into key financial drivers for forecasting and variance analysis. All calculations reference specific data sources so you can trace numbers and explain the analysis to leadership.
             </p>
 
             <div class="problem-solution-grid">
                 <div class="ps-card financial">
-                    <div class="ps-icon">📈</div>
-                    <h3 class="ps-title">Income Statement Drivers</h3>
+                    <div class="ps-icon">📋</div>
+                    <h3 class="ps-title">Data Sources</h3>
                     <ul class="ps-list">
-                        <li><strong>Revenue:</strong> Production volume × realized price (WTI - WCS differential)</li>
-                        <li><strong>Operating Costs:</strong> Energy intensity × utility rates + labor + maintenance</li>
-                        <li><strong>Gross Margin:</strong> Recovery rate efficiency directly impacts per-barrel profitability</li>
-                        <li><strong>EBITDA:</strong> Energy efficiency variance creates $2-5/bbl margin differences</li>
+                        <li><strong>AER ST39:</strong> Production (m³), energy use (MWh), gas use (10³m³), recovery rates</li>
+                        <li><strong>Market Benchmarks:</strong> WCS/WTI pricing, power rates ($50/MWh), gas rates ($3/GJ)</li>
+                        <li><strong>Company Reports:</strong> Suncor, CNRL, Imperial 2023 financials for cost benchmarks</li>
+                        <li><strong>Conversion:</strong> 1 m³ bitumen = 6.29 barrels</li>
                     </ul>
                 </div>
 
                 <div class="ps-card financial">
-                    <div class="ps-icon">⚖️</div>
-                    <h3 class="ps-title">Balance Sheet Considerations</h3>
+                    <div class="ps-icon">📊</div>
+                    <h3 class="ps-title">FP&A Use Cases</h3>
                     <ul class="ps-list">
-                        <li><strong>PP&E:</strong> Capital intensity varies by integrated vs. bitumen-only operations</li>
-                        <li><strong>Inventory:</strong> Production volatility impacts working capital requirements</li>
-                        <li><strong>ARO Liabilities:</strong> Mine site reclamation obligations accrue over mine life</li>
-                        <li><strong>Reserves:</strong> Recovery rate assumptions affect reserve booking</li>
+                        <li>Budget vs. actual variance analysis for production and costs</li>
+                        <li>Operating cost forecasting by production scenario</li>
+                        <li>Benchmarking efficiency metrics against industry peers</li>
+                        <li>Sensitivity analysis for commodity prices and operating leverage</li>
                     </ul>
                 </div>
             </div>
 
-            <h3 class="section-subtitle">Income Statement Impact Analysis</h3>
+            <h3 class="section-subtitle">Revenue Drivers</h3>
             <div class="financial-grid">
                 <div class="financial-statement-card">
-                    <h4>📊 Revenue Line Items</h4>
+                    <h4>📈 Production Volume Growth Impact</h4>
                     <div class="line-items">
                         <div class="line-item income">
-                            <span class="line-item-name">Crude Bitumen Sales</span>
-                            <span class="line-item-impact">Production volume (m³) × WCS price. 5.1% YoY production growth translates directly to top-line revenue growth at constant pricing.</span>
+                            <span class="line-item-name">2024 vs 2023 Production</span>
+                            <span class="line-item-impact"><strong>Source:</strong> AER ST39. <strong>2024:</strong> 90.55M m³ <strong>2023:</strong> 86.19M m³. <strong>Growth:</strong> 4.36M m³ = 27.4M barrels (+5.1%). <strong>Revenue Impact:</strong> At $55/bbl WCS, this is $1.51B additional industry revenue.</span>
                         </div>
                         <div class="line-item income">
-                            <span class="line-item-name">Synthetic Crude Oil (SCO) Sales</span>
-                            <span class="line-item-impact">Integrated operators (Suncor, CNRL Horizon, Syncrude) capture WTI pricing premium but incur upgrading costs—net margin depends on WTI-WCS differential.</span>
-                        </div>
-                        <div class="line-item income">
-                            <span class="line-item-name">Price Realization</span>
-                            <span class="line-item-impact">At $70 WTI and $15 WCS discount, bitumen realizes ~$55/bbl; SCO realizes ~$68-70/bbl. Operator mix affects average realization.</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="financial-statement-card">
-                    <h4>💵 Operating Cost Drivers</h4>
-                    <div class="line-items">
-                        <div class="line-item income">
-                            <span class="line-item-name">Energy Costs (Electricity)</span>
-                            <span class="line-item-impact">Energy intensity variance of 0.051-0.260 MWh/m³ creates $1.50-3.00/bbl cost differential at $50/MWh power rates.</span>
-                        </div>
-                        <div class="line-item income">
-                            <span class="line-item-name">Natural Gas Costs</span>
-                            <span class="line-item-impact">Gas intensity range of 0.105-0.387 10³m³/m³ represents $0.50-2.00/bbl variance at $3/GJ natural gas pricing.</span>
-                        </div>
-                        <div class="line-item income">
-                            <span class="line-item-name">Mining & Processing</span>
-                            <span class="line-item-impact">Recovery rate (87.5-111.5 m³/1000t) directly impacts ore processing costs per barrel—higher recovery = lower cost per m³ bitumen.</span>
-                        </div>
-                        <div class="line-item income">
-                            <span class="line-item-name">Total Operating Cost Variance</span>
-                            <span class="line-item-impact">Best-in-class operators (Syncrude Aurora, CNUL Jackpine) achieve ~$20-25/bbl operating costs vs. $30-35/bbl for less efficient operations.</span>
+                            <span class="line-item-name">Price Realization by Product Type</span>
+                            <span class="line-item-impact"><strong>Bitumen (Kearl, Fort Hills):</strong> WCS pricing, typically WTI minus $12-18/bbl. Example: $70 WTI = $55/bbl realized. <strong>SCO (Suncor, CNRL Horizon, Syncrude):</strong> WTI minus $2-5/bbl = $65-68/bbl, giving $10-13/bbl premium but with upgrading costs.</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <h3 class="section-subtitle">Balance Sheet Impact Analysis</h3>
+            <h3 class="section-subtitle">Operating Cost Analysis</h3>
             <div class="financial-grid">
                 <div class="financial-statement-card">
-                    <h4>🏗️ Asset Implications</h4>
+                    <h4>💵 Energy Costs: Largest Variable OpEx Driver</h4>
                     <div class="line-items">
-                        <div class="line-item balance">
-                            <span class="line-item-name">Property, Plant & Equipment</span>
-                            <span class="line-item-impact">Integrated upgrader facilities (Suncor, CNRL Horizon) carry $15-25B+ PP&E vs. $5-10B for bitumen-only operations. Higher depreciation burden.</span>
+                        <div class="line-item income">
+                            <span class="line-item-name">Electricity Cost Calculation</span>
+                            <span class="line-item-impact"><strong>Formula:</strong> Energy intensity (MWh/m³) × Power rate ($/MWh) ÷ 6.29 = $/bbl. <strong>Best:</strong> 0.051 × $50 ÷ 6.29 = $0.41/bbl. <strong>Worst:</strong> 0.260 × $50 ÷ 6.29 = $2.07/bbl. <strong>Variance:</strong> $1.66/bbl or $60.6M/year for 100k bbl/day facility.</span>
                         </div>
-                        <div class="line-item balance">
-                            <span class="line-item-name">Mining Equipment & Fleet</span>
-                            <span class="line-item-impact">Ore processing volumes (directly tied to recovery rate) drive haul truck, shovel, and processing equipment requirements.</span>
+                        <div class="line-item income">
+                            <span class="line-item-name">Natural Gas Cost Calculation</span>
+                            <span class="line-item-impact"><strong>Formula:</strong> Gas intensity (10³m³/m³) × $80/1000m³ ÷ 6.29 = $/bbl. <strong>Best:</strong> 0.105 × 80 ÷ 6.29 = $1.34/bbl. <strong>Worst:</strong> 0.387 × 80 ÷ 6.29 = $4.92/bbl. <strong>Variance:</strong> $3.58/bbl or $130.6M/year for 100k bbl/day facility.</span>
                         </div>
-                        <div class="line-item balance">
-                            <span class="line-item-name">Working Capital (Inventory)</span>
-                            <span class="line-item-impact">Production volatility (17-29% CV) affects inventory carrying costs. Higher volatility operators require larger buffer stocks.</span>
+                        <div class="line-item income">
+                            <span class="line-item-name">Combined Energy Impact</span>
+                            <span class="line-item-impact"><strong>Total variance:</strong> $1.66 + $3.58 = $5.24/bbl difference between best and worst operators. <strong>At 100k bbl/day:</strong> $5.24 × 36.5M bbl/year = $191M annual impact. <strong>FP&A Insight:</strong> Energy efficiency is the #1 driver of operating cost variance.</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="financial-statement-card">
-                    <h4>📋 Liability Implications</h4>
+                    <h4>⛏️ Recovery Rate Impact on Mining Costs</h4>
                     <div class="line-items">
-                        <div class="line-item balance">
-                            <span class="line-item-name">Asset Retirement Obligations (ARO)</span>
-                            <span class="line-item-impact">Mine reclamation liabilities of $1-3B per major operation. Accumulated over mine life; discount rate and timeline assumptions critical.</span>
+                        <div class="line-item income">
+                            <span class="line-item-name">Recovery Rate Data Range</span>
+                            <span class="line-item-impact"><strong>Source:</strong> AER ST39 (Bitumen m³ ÷ Ore tonnes × 1,000). <strong>Best:</strong> 111.5 m³/1000t (CNUL Muskeg). <strong>Worst:</strong> 87.5 m³/1000t (CNRL Horizon). <strong>Concept:</strong> Higher recovery = more output per tonne mined = lower unit cost.</span>
                         </div>
-                        <div class="line-item balance">
-                            <span class="line-item-name">Long-Term Debt</span>
-                            <span class="line-item-impact">Capital-intensive nature requires significant debt financing. Interest coverage ratios sensitive to production reliability.</span>
+                        <div class="line-item income">
+                            <span class="line-item-name">Cost per Barrel Impact</span>
+                            <span class="line-item-impact"><strong>Assumption:</strong> $5/tonne mining cost (from Suncor/CNRL reports). <strong>Low recovery:</strong> 87.5 m³/1000t = $9.09/bbl. <strong>High recovery:</strong> 111.5 m³/1000t = $7.13/bbl. <strong>Savings:</strong> $1.96/bbl or $71.5M/year for 100k bbl/day facility.</span>
                         </div>
-                        <div class="line-item balance">
-                            <span class="line-item-name">Lease Liabilities</span>
-                            <span class="line-item-impact">Mining equipment leases and land tenure obligations create off-balance sheet considerations under IFRS 16.</span>
+                    </div>
+                </div>
+
+                <div class="financial-statement-card">
+                    <h4>📊 Total Operating Cost Benchmarks</h4>
+                    <div class="line-items">
+                        <div class="line-item income">
+                            <span class="line-item-name">Industry OpEx Range</span>
+                            <span class="line-item-impact"><strong>Source:</strong> Suncor Q4 2023, CNRL Q4 2023, Cenovus Q4 2023. <strong>Range:</strong> $25-40/bbl all-in (energy, labor, royalties, maintenance). <strong>Best-in-class:</strong> $23-28/bbl (low energy, high recovery). <strong>Below-average:</strong> $33-40/bbl (high energy, low recovery).</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <h3 class="section-subtitle">Cash Flow Impact Analysis</h3>
+            <h3 class="section-subtitle">Cash Flow Forecasting</h3>
             <div class="financial-grid">
                 <div class="financial-statement-card">
-                    <h4>💰 Cash Flow Statement Drivers</h4>
+                    <h4>💰 Operating Cash Flow Sensitivity</h4>
                     <div class="line-items">
                         <div class="line-item cashflow">
-                            <span class="line-item-name">Operating Cash Flow</span>
-                            <span class="line-item-impact">Energy efficiency directly impacts CFO. $2-5/bbl operating cost advantage at 100,000 bbl/day = $73M-182M annual cash flow improvement.</span>
+                            <span class="line-item-name">Production Growth Impact on Cash</span>
+                            <span class="line-item-impact"><strong>2024 growth:</strong> +27.4M barrels industry-wide (AER ST39). <strong>At $30/bbl netback:</strong> 27.4M × $30 = $822M incremental operating cash flow. <strong>FP&A Use:</strong> Production variance scenarios for budget forecasts.</span>
                         </div>
                         <div class="line-item cashflow">
-                            <span class="line-item-name">Capital Expenditures</span>
-                            <span class="line-item-impact">Sustaining capital of $8-12/bbl for mine operations + $15-25/bbl for upgrader maintenance. Efficiency investments reduce long-term CapEx intensity.</span>
+                            <span class="line-item-name">Energy Efficiency Cash Impact</span>
+                            <span class="line-item-impact"><strong>$5.24/bbl cost advantage</strong> for efficient operators. <strong>At 100k bbl/day:</strong> $191M/year higher operating cash flow. <strong>FP&A Use:</strong> Benchmark actual energy costs vs. peer group to identify improvement opportunities.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="financial-statement-card">
+                    <h4>🏗️ Capital Expenditure Planning</h4>
+                    <div class="line-items">
+                        <div class="line-item cashflow">
+                            <span class="line-item-name">Sustaining CapEx Benchmark</span>
+                            <span class="line-item-impact"><strong>Industry range:</strong> $8-15/bbl (source: Suncor, CNRL guidance). <strong>100k bbl/day example:</strong> At $12/bbl, sustaining CapEx = $438M/year. <strong>FP&A Use:</strong> Maintenance capital budgeting and free cash flow forecasts.</span>
                         </div>
                         <div class="line-item cashflow">
-                            <span class="line-item-name">Working Capital Changes</span>
-                            <span class="line-item-impact">Seasonal production patterns (14% Q2 variance) create ~$300-500M quarterly working capital swings at $70 WTI pricing.</span>
-                        </div>
-                        <div class="line-item cashflow">
-                            <span class="line-item-name">Free Cash Flow Sensitivity</span>
-                            <span class="line-item-impact">Recovery rate improvement of 10 m³/1000t ore generates ~$75-100M annual FCF improvement for a 100,000 bbl/day operation.</span>
+                            <span class="line-item-name">Efficiency Project Payback</span>
+                            <span class="line-item-impact"><strong>Example:</strong> $100M CapEx to reduce energy costs by $30M/year = 3.3 year payback. <strong>FP&A Use:</strong> Evaluate efficiency improvement projects vs. hurdle rates; prioritize operators with worst metrics (highest upside).</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <h3 class="section-subtitle">Key Financial Ratios Affected</h3>
+            <h3 class="section-subtitle">Key FP&A Metrics</h3>
             <div class="insights-grid">
                 <div class="insight-card income">
-                    <h3 class="insight-title">💹 Profitability Metrics</h3>
+                    <h3 class="insight-title">💵 Operating Netback ($/bbl)</h3>
                     <p class="insight-text">
-                        <strong>EBITDA Margin:</strong> Energy-efficient operators achieve 35-45% EBITDA margins vs. 25-35% for less efficient peers. <strong>Operating Netback:</strong> Ranges from $15-30/bbl depending on efficiency metrics.
+                        <strong>Formula:</strong> WCS price - royalties - transport - OpEx. <strong>Example:</strong> $55 - $7 - $3 - $25 = $20/bbl. <strong>Range:</strong> $15-30/bbl based on efficiency (AER ST39 data). <strong>Use:</strong> Key driver for operating cash flow; variance analysis vs. budget.
                     </p>
                 </div>
-                <div class="insight-card balance">
-                    <h3 class="insight-title">📊 Leverage Ratios</h3>
+                <div class="insight-card income">
+                    <h3 class="insight-title">💹 EBITDA Margin (%)</h3>
                     <p class="insight-text">
-                        <strong>Debt/EBITDA:</strong> Integrated upgraders typically 1.5-2.5x vs. 1.0-1.5x for bitumen-only due to higher capital intensity. <strong>Interest Coverage:</strong> Production reliability directly impacts coverage ratios.
+                        <strong>Formula:</strong> (Revenue - OpEx) ÷ Revenue. <strong>Efficient operator:</strong> ($55 - $25) ÷ $55 = 54.5%. <strong>Inefficient:</strong> ($55 - $35) ÷ $55 = 36.4%. <strong>Use:</strong> Profitability benchmarking; track quarterly trends vs. peers.
                     </p>
                 </div>
                 <div class="insight-card cashflow">
-                    <h3 class="insight-title">🔄 Return Metrics</h3>
+                    <h3 class="insight-title">📊 Free Cash Flow (FCF)</h3>
                     <p class="insight-text">
-                        <strong>ROIC:</strong> High recovery rate operations achieve 12-18% ROIC vs. 8-12% for lower efficiency. <strong>FCF Yield:</strong> Energy efficiency drives 5-8% FCF yield differential between best and worst performers.
+                        <strong>Formula:</strong> Operating cash flow - CapEx. <strong>Efficiency impact:</strong> Energy ($191M) + recovery ($73M) = $264M FCF improvement potential for worst-to-best quartile move. <strong>Use:</strong> Dividend coverage, debt repayment capacity forecasts.
                     </p>
                 </div>
             </div>
+
+            <h3 class="section-subtitle">Summary: Data-to-Financial Statement Flow</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>AER ST39 Metric</th>
+                        <th>Financial Impact</th>
+                        <th>Typical Variance</th>
+                        <th>FP&A Application</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Production Volume (m³)</td>
+                        <td>Revenue = Volume × Price</td>
+                        <td class="highlight">+5.1% YoY = $1.51B revenue</td>
+                        <td>Top-line forecasts, scenario planning</td>
+                    </tr>
+                    <tr>
+                        <td>Energy Intensity (MWh/m³)</td>
+                        <td>Electricity operating cost</td>
+                        <td class="highlight">$1.66/bbl variance = $60.6M/year</td>
+                        <td>OpEx budgeting, efficiency benchmarking</td>
+                    </tr>
+                    <tr>
+                        <td>Gas Intensity (10³m³/m³)</td>
+                        <td>Natural gas operating cost</td>
+                        <td class="highlight">$3.58/bbl variance = $130.6M/year</td>
+                        <td>OpEx budgeting, carbon cost modeling</td>
+                    </tr>
+                    <tr>
+                        <td>Recovery Rate (m³/1000t)</td>
+                        <td>Mining cost per barrel</td>
+                        <td class="highlight">$1.96/bbl variance = $71.5M/year</td>
+                        <td>Mining OpEx forecasts, CapEx prioritization</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
         <!-- Strategic Implications Section -->
@@ -1259,12 +1277,6 @@
                     </p>
                 </div>
                 <div class="insight-card">
-                    <h3 class="insight-title">📊 Visualization</h3>
-                    <p class="insight-text">
-                        SAP Analytics Cloud models built for interactive analysis. Dashboards enable drill-down by operator, time period, and metric category.
-                    </p>
-                </div>
-                <div class="insight-card">
                     <h3 class="insight-title">📈 Statistical Analysis</h3>
                     <p class="insight-text">
                         Excel used for descriptive statistics, trend analysis, and CAGR calculations. Correlation analysis for efficiency metric benchmarking.
@@ -1280,47 +1292,6 @@
                 <li>5-year window may not capture full commodity price cycles</li>
                 <li>Missing context: realized prices, turnaround schedules, capital projects during period</li>
             </ul>
-
-            <h3 class="section-subtitle">Recommended SAP Analytics Cloud Dashboards</h3>
-            <p class="section-text">
-                The following dashboard structures are recommended for SAP Analytics Cloud implementation. Each can be embedded into this report via iframe once the SAC story URLs are available:
-            </p>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Dashboard</th>
-                        <th>Key Visualizations</th>
-                        <th>Primary Use Case</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Executive Overview</strong></td>
-                        <td>KPI cards (total production, YoY growth), donut chart (market share), bar chart (annual production)</td>
-                        <td>High-level industry snapshot for leadership</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Production Performance</strong></td>
-                        <td>Stacked area chart (monthly production by operator), trend lines, seasonal decomposition</td>
-                        <td>Production forecasting and planning</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Operational Efficiency</strong></td>
-                        <td>Horizontal bar charts (recovery rate, energy intensity, gas intensity), color-coded performance</td>
-                        <td>Efficiency benchmarking and improvement targeting</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Competitive Benchmarking</strong></td>
-                        <td>Quadrant analysis (production vs. efficiency), percentile rankings, indexed comparisons</td>
-                        <td>Strategic positioning and peer analysis</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Financial Impact Model</strong></td>
-                        <td>Waterfall charts (cost buildup), sensitivity tables, scenario comparison</td>
-                        <td>Business planning and capital allocation</td>
-                    </tr>
-                </tbody>
-            </table>
         </section>
 
         <!-- CTA Section -->
